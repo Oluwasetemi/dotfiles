@@ -1,0 +1,211 @@
+{
+  "breadcrumbs.enabled": true,
+  // "html.suggest.ionic": false,
+  // "html.suggest.angular1": false,
+  "html.format.indentInnerHtml": true,
+  "html.format.enable": true,
+  "html.format.preserveNewLines": true,
+  "files.autoSave": "afterDelay",
+  "files.associations": {
+    "*.ejs": "html",
+    "*.jsx": "javascriptreact"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "workbench.iconTheme": "vscode-great-icons",
+  "workbench.editor.showTabs": true,
+  // this lets you quickly open multiple items in a row and not have the previous ones closed on you
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.editor.enablePreview": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "vsicons.dontShowNewVersionMessage": true,
+  "window.newWindowDimensions": "inherit",
+  "window.zoomLevel": 0,
+  "window.smoothScrollingWorkaround": true,
+  "window.titleBarStyle": "custom",
+  "workbench.sideBar.location": "right",
+  "workbench.colorTheme": "Shades of Purple",
+  "window.menuBarVisibility": "visible",
+  "prettier.singleQuote": true,
+  "prettier.eslintIntegration": false,
+  "prettier.semi": true,
+  "prettier.bracketSpacing": true,
+  "prettier.trailingComma": "all",
+  "eslint.run": "onType",
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "editor.fontFamily": "'fira code light', monaco, Monoid, Hermit Light, Consolas",
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "on",
+  "editor.fontSize": 12,
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 2,
+  "editor.cursorBlinking": "solid",
+  "editor.colorDecorators": true,
+  "editor.fontWeight": "100",
+  "editor.lineHeight": 17.65,
+  "editor.tabSize": 2,
+  "editor.glyphMargin": true,
+  "editor.letterSpacing": 0.3,
+  "editor.renderWhitespace": "none",
+  "editor.rulers": [80, 100, 120],
+  "editor.minimap.enabled": true,
+  // show snippets before any other auto completion
+  "editor.snippetSuggestions": "top",
+  "editor.fontLigatures": true,
+  "editor.tabCompletion": "on",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "markdown": "html",
+    "vue-html": "html",
+    "markdownreact": "html"
+  },
+  "emmet.excludeLanguages": [],
+  "css.lint.zeroUnits": "error",
+  "terminal.integrated.fontFamily": "monaco, 'Anonymous Pro', monoid,'Envy Code R', monospace",
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.lineHeight": 1.2,
+  "terminal.integrated.rendererType": "canvas",
+  "terminal.integrated.enableBell": true,
+  "terminal.integrated.fontWeightBold": "100",
+  "terminal.integrated.letterSpacing": 1,
+  "terminal.integrated.fontWeight": "100",
+  "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "editor.tokenColorCustomizations": {
+    // "comments": "#D80C0F",
+    // "functions": "#EE089A",
+    "textMateRules": [
+      {
+        "scope": [
+          "comment",
+          "keyword.control",
+          "keyword.operator.new",
+          "keyword.operator.assignment",
+          "keyword.operator.arithmetic",
+          "keyword.other",
+          "storage.modifier",
+          "storage.type",
+          "support.class",
+          "support.constant",
+          "support.function",
+          "support.other",
+          "entity.name.class",
+          // Function might be overkill in JSX files
+          "entity.name.function",
+          "entity.name.method",
+          "entity.name.section",
+          "entity.name.selector",
+          "entity.name.type",
+          "entity.other",
+          "entity.other.attribute-name",
+          "entity.other.inherited-class"
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      },
+      {
+        // No one likes an italicised arrow function
+        "scope": ["storage.type.function.arrow"],
+        "settings": {
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+  "workbench.colorCustomizations": {
+    "terminal.foreground": "#FAD000",
+    "editorLineNumber.foreground": "#FAD000",
+    "editorLineNumber.activeForeground": "#7700ff",
+    "menu.separatorBackground": "#c25a63",
+    "inputValidation.infoForeground": "#00ff00",
+    "inputValidation.warningForeground": "#ffd500",
+    "inputValidation.errorForeground": "#ff0000",
+    "editor.snippetTabstopHighlightBackground": "#369",
+    "editor.snippetTabstopHighlightBorder": "#583399",
+    "editor.snippetFinalTabstopHighlightBackground": "#3d9933",
+    "editor.snippetFinalTabstopHighlightBorder": "#5c12db",
+    // "activityBar.inactiveForeground": "#000",
+  },
+  /* "materialTheme.cache.workbench.settings": {
+        "accent": "Pink",
+        "themeColours": "Light"
+    }, */
+  "gitlens.keymap": "alternate",
+  "markdown.preview.fontFamily": " 'Ubuntu', 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light' , 'Droid Sans', sans-serif",
+  "markdown.extension.onBackspaceKey": "Backspace",
+  "markdown.extension.onEnterKey": "Enter",
+  "markdown.preview.fontSize": 12,
+  "[markdown]": {
+    "editor.codeLens": true,
+    "editor.wordWrap": "on",
+    "editor.autoIndent": true,
+    "editor.fontLigatures": true,
+    "editor.quickSuggestions": true,
+    "editor.emptySelectionClipboard": false
+  },
+  "markdownlint.config": {
+    "no-empty-links": false,
+    "code": true,
+    "fenced-code-language": true,
+    "language": true,
+    "no-duplicate-header": true,
+    "atx": true
+  },
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": true,
+    "suppressShowKeyBindingsNotice": true,
+    "suppressUpdateNotice": false,
+    "suppressWelcomeNotice": true
+  },
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "sync.gist": "40ba9fae99386ab07a9427b9f6e0c847",
+  "sync.lastUpload": "2018-08-15T01:31:22.248Z",
+  "sync.autoDownload": false,
+  "sync.autoUpload": false,
+  "sync.lastDownload": "2018-08-15T01:31:22.2{48Z",
+  "sync.forceDownload": true,
+  "sync.host": "",
+  "sync.pathPrefix": "",
+  "sync.quietSync": false,
+  "sync.askGistName": true,
+  "cSpell.userWords": ["devtool", "dompurify", "hacky", "subcomponent"],
+  "sync.removeExtensions": false,
+  "sync.syncExtensions": true,
+  "gitlens.historyExplorer.enabled": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.next": true
+  },
+  "[json]": {
+    "editor.quickSuggestions": {
+      "strings": true,
+      "comments": true
+    }
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "java.errors.incompleteClasspath.severity": "ignore",
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+
+}

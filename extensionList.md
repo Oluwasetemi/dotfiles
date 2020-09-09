@@ -106,3 +106,5 @@ whizkydee.material-palenight-theme
 wingrunr21.vscode-ruby
 wix.vscode-import-cost
 yzhang.markdown-all-in-one
+
+[Setting Sync](https://gist.github.com/Oluwasetemi/40ba9fae99386ab07a9427b9f6e0c847)

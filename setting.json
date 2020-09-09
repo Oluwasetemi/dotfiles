@@ -1,30 +1,35 @@
 {
     "breadcrumbs.enabled": true,
-
     /**
     //--------------------------------------------------
     // ** EDITOR **
     //--------------------------------------------------
     */
-
-    "editor.fontFamily": "'Operator Mono Light','Dank Mono', 'fira code light', monaco, Monoid, Hermit Light, Consolas",
+    "editor.fontFamily": "'Operator Mono','Dank Mono', 'fira code light', monaco, Monoid, Hermit Light, Consolas",
     // "editor.formatOnSave": true,
     "editor.wordWrap": "on",
     "editor.fontSize": 12,
     "editor.cursorStyle": "line",
-    "editor.cursorWidth": 2,
+    "editor.cursorWidth": 3,
     "editor.cursorBlinking": "solid",
     "editor.colorDecorators": true,
+    "editor.matchBrackets": "near",
     // "editor.parameterHints.enabled": false,
     "editor.fontWeight": "100",
-    "editor.lineHeight": 17.65,
+    "editor.lineHeight": 17,
     "editor.glyphMargin": true,
     "editor.letterSpacing": 0.3,
     "editor.renderWhitespace": "none",
-    "editor.rulers": [80, 100, 120],
-    "editor.minimap.enabled": true,
+    "editor.rulers": [
+        80,
+        100,
+        120
+    ],
+    "editor.minimap.enabled": false,
     "editor.formatOnSave": true,
-    "editor.gotoLocation.multiple": "goto",
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.gotoLocation.multipleDefinitions": "goto",
     "editor.renderControlCharacters": false,
     "editor.smoothScrolling": true,
     "editor.cursorSmoothCaretAnimation": true,
@@ -38,41 +43,49 @@
     "editor.lineNumbers": "on",
     // The number of spaces a tab is equal to. This setting is overridden
     // based on the file contents when `editor.detectIndentation` is true.
-    "editor.tabSize": 4,
-
+    "editor.tabSize": 2,
     // Insert spaces when pressing Tab. This setting is overriden
     // based on the file contents when `editor.detectIndentation` is true.
     "editor.insertSpaces": true,
-
     // When opening a file, `editor.tabSize` and `editor.insertSpaces`
     // will be detected based on the file contents. Set to false to keep
     // the values you've explicitly set, above.
-    "editor.detectIndentation": false,
-
+    "editor.detectIndentation": true,
+    // "javascript.format.semicolons": "insert",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.renameOnType": true,
     /**
     //--------------------------------------------------
     // ** EDITOR COLOR **
     //--------------------------------------------------
     */
     "editor.tokenColorCustomizations": {},
-
     // turn it off for JS and JSX, we will do this via eslint
+    "editor.codeActionsOnSave": {
+        "source.fixAll": false,
+        // allow eslint to fix auto fixable code on autosave
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true,
+        "source.fixAll.tslint": true,
+        "source.fixAll.stylelint": true
+    },
     "[javascript]": {
         "editor.formatOnSave": false,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.autoIndent": "advanced",
+        "editor.showUnused": true
     },
     "[javascriptreact]": {
-        "editor.formatOnSave": false
+        "editor.formatOnSave": false,
+        "editor.showUnused": true
     },
-
     /**
     //--------------------------------------------------
     // ** ESLINT **
     //--------------------------------------------------
     */
-
     "eslint.run": "onSave",
-    "eslint.autoFixOnSave": true,
+    // "eslint.autoFixOnSave": true,
     "eslint.alwaysShowStatus": true,
     "eslint.validate": [
         "javascript",
@@ -80,24 +93,32 @@
         "typescript",
         "typescriptreact"
     ],
-    // "eslint.options": {
-    //     "env": {
-    //         "browser": true,
-    //         "jest/globals": true,
-    //         "es6": true
-    //     },
-    //     "parserOptions": {
-    //         "ecmaVersion": 2018,
-    //         "sourceType": "module",
-    //         "ecmaFeatures": {
-    //             "jsx": true
-    //         }
-    //     },
-    //     "rules": {
-    //         "no-debugger": "off"
-    //     }
-    // },
-
+    "eslint.options": {
+        "extensions": [
+            ".js",
+            ".jsx",
+            ".md",
+            ".mdx",
+            ".ts",
+            ".tsx"
+        ],
+        "env": {
+            "browser": true,
+            "jest/globals": true,
+            "es6": true
+        },
+        "parserOptions": {
+            "ecmaVersion": 2020,
+            "sourceType": "module",
+            "ecmaFeatures": {
+                "jsx": true
+            }
+        },
+        "rules": {
+            "no-debugger": "off"
+            // "semi": [1, "always"]
+        }
+    },
     /**
     //--------------------------------------------------
     // ** EMMET **
@@ -107,10 +128,10 @@
         "javascript": "javascriptreact",
         "markdown": "html",
         "vue-html": "html",
-        "markdownreact": "html"
+        "markdownreact": "html",
+        "mdx": "html"
     },
     "emmet.excludeLanguages": [],
-
     /**
     //--------------------------------------------------
     // ** FILES **
@@ -133,14 +154,13 @@
     "files.associations": {
         "*.ejs": "html",
         "*.jsx": "javascriptreact",
-        "*.md": "mdx",
-        ".lintstagedrc": "json"
+        "*.md": "markdown",
+        ".lintstagedrc": "json",
+        ".bash_profile": "shellscript"
     },
-
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "files.eol": "\n",
-
     /**
     //--------------------------------------------------
     // ** HTML **
@@ -165,7 +185,6 @@
     "workbench.settings.editor": "json",
     "workbench.tips.enabled": false,
     // "workbench.dailogs.useSimplified": true,
-
     /**
     //--------------------------------------------------
     // ** WORKBENCH COLOR **
@@ -179,6 +198,7 @@
         "inputValidation.infoForeground": "#00ff00",
         "inputValidation.warningForeground": "#ffd500",
         "inputValidation.errorForeground": "#ff0000",
+        "editorCursor.foreground": "#ff0000",
         "editor.snippetTabstopHighlightBackground": "#369",
         "editor.snippetTabstopHighlightBorder": "#583399",
         "editor.snippetFinalTabstopHighlightBackground": "#3d9933",
@@ -187,7 +207,6 @@
         // "tab.inactiveBackground": "#f7d958",
         // "tab.inactiveForeground": "#d64b0a"
     },
-
     /**
     //--------------------------------------------------
     // ** WINDOW **
@@ -195,9 +214,7 @@
     */
     "window.newWindowDimensions": "inherit",
     "window.zoomLevel": 0,
-    "window.menuBarVisibility": "visible",
     "window.titleBarStyle": "custom",
-
     /**
     //--------------------------------------------------
     // ** PRETTIER **
@@ -213,55 +230,55 @@
     "prettier.singleQuote": true,
     "prettier.trailingComma": "all",
     "prettier.jsxBracketSameLine": false,
-    "prettier.semi": false,
-    "prettier.useTabs": false,
+    "prettier.semi": true,
+    "prettier.useTabs": true,
     "prettier.proseWrap": "always",
     // Optional BUT IMPORTANT: If you have the prettier extension enabled for other languages like CSS and HTML, turn it off for JS since we are doing it through Eslint already
-    "prettier.disableLanguages": ["javascript", "javascriptreact"],
+    "prettier.disableLanguages": [
+        "javascript",
+        "javascriptreact"
+    ],
     // show snippets before any other auto completion
-
     /**
     //--------------------------------------------------
     // ** EXPLORER **
     //--------------------------------------------------
     */
     "explorer.openEditors.visible": 0,
-
     /**
     //--------------------------------------------------
     // ** CSS **
     //--------------------------------------------------
     */
-    "css.lint.zeroUnits": "error",
-
+    "css.lint.zeroUnits": "ignore",
     /**
     //--------------------------------------------------
     // ** JAVASCRIPT **
     //--------------------------------------------------
     */
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "javascript.suggest.autoImports": false,
+    "javascript.suggest.autoImports": true,
     "javascript.validate.enable": false,
-
+    "javascript.preferences.quoteStyle": "auto",
     /**
     //--------------------------------------------------
     // ** TERMINAL **
     //--------------------------------------------------
     */
-    "terminal.integrated.fontFamily": "'Dank Mono', monaco, 'Anonymous Pro', monoid,'Envy Code R', monospace",
+    "terminal.integrated.fontFamily": "'Fira Code', monaco, 'Anonymous Pro', monoid,'Envy Code R', monospace",
     "terminal.integrated.fontSize": 12,
     "terminal.integrated.lineHeight": 1.2,
     "terminal.integrated.rendererType": "canvas",
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontWeightBold": "100",
-    "terminal.integrated.letterSpacing": 1,
+    "terminal.integrated.letterSpacing": 0.5,
     "terminal.integrated.fontWeight": "100",
     "terminal.integrated.showExitAlert": false,
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.shellArgs.osx": ["-l"],
-
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "terminal.integrated.automationShell.osx": "/bin/sh",
+    "terminal.integrated.shellArgs.osx": [],
     /**
     //--------------------------------------------------
     // ** MARKDOWN **
@@ -272,10 +289,12 @@
     "[markdown]": {
         "editor.codeLens": true,
         "editor.wordWrap": "on",
-        "editor.autoIndent": true,
+        // changed 1.41 release
+        "editor.autoIndent": "advanced",
         "editor.fontLigatures": true,
         "editor.quickSuggestions": true,
-        "editor.emptySelectionClipboard": false
+        "editor.emptySelectionClipboard": false,
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
     "markdownlint.config": {
         "no-empty-links": false,
@@ -285,7 +304,14 @@
         "no-duplicate-header": true,
         "atx": true
     },
-
+    /**
+    //--------------------------------------------------
+    // ** DEBUG **
+    //--------------------------------------------------
+    */
+    "phpcs.enable": true,
+    "phpcs.composerJsonPath": "composer.json",
+    "phpcs.executablePath": "/Users/oluwasetemi/.composer/vendor/bin/phpcs",
     /**
     //--------------------------------------------------
     // ** DEBUG **
@@ -301,6 +327,12 @@
     // ** EXTENSIONS **
     //--------------------------------------------------
     */
+    "auto-rename-tag.activationOnLanguage": [
+        "html",
+        "xml",
+        "javascript",
+        "javascriptreact"
+    ],
     "gitlens.keymap": "alternate",
     "gitlens.advanced.messages": {
         "suppressFileNotUnderSourceControlWarning": true,
@@ -312,19 +344,13 @@
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "sync.gist": "40ba9fae99386ab07a9427b9f6e0c847",
-    "sync.lastUpload": "2018-08-15T01:31:22.248Z",
     "sync.autoDownload": false,
     "sync.autoUpload": false,
-    "sync.lastDownload": "2018-08-15T01:31:22.2{48Z",
     "sync.forceDownload": true,
-    "sync.host": "",
-    "sync.pathPrefix": "",
     "sync.quietSync": false,
-    "sync.askGistName": true,
-    "local-history.absolute": true,
-    "local-history.path": "./.vscode-history",
+    // "local-history.absolute": true,
+    // "local-history.path": "./.vscode-history",
     "grunt.autoDetect": "off",
-
     /**
     //--------------------------------------------------
     // ** NPM **
@@ -344,15 +370,28 @@
     },
     "cSpell.userWords": [
         "Equilibra",
+        "Freecodecamp",
+        "Kubernetes",
+        "Mixins",
         "Oluwasetemi",
+        "Oluwasetemi's",
+        "Osogbo",
+        "PERMISSIONUPDATE",
+        "Signout",
+        "Spotify",
         "Validators",
+        "Workcation",
         "autopopulate",
         "backticks",
+        "clickoutside",
         "currentuser",
+        "destructure",
         "destructured",
         "devtool",
         "dompurify",
+        "espanso",
         "firstname",
+        "ghpages",
         "graphiql",
         "graphql",
         "gravatar",
@@ -360,16 +399,30 @@
         "inprogress",
         "lastname",
         "linebreak",
+        "localstorage",
+        "mailtrap",
+        "maxlength",
         "microservice",
+        "middlewares",
         "mimetype",
         "minlength",
+        "minmax",
+        "mydate",
         "natterbase",
         "originalname",
+        "paystack",
         "precommit",
+        "prepending",
+        "promisification",
+        "promisify",
         "pubsub",
+        "purgecss",
+        "refetch",
         "signup",
         "stacktraces",
         "subcomponent",
+        "tabindex",
+        "tailwindcss",
         "totalearned",
         "virtuals"
     ],
@@ -389,21 +442,6 @@
     "files.autoSaveDelay": 5000,
     "peacock.affectActivityBar": true,
     "peacock.affectStatusBar": true,
-    "peacock.preferredColors": [
-        {
-            "name": "Gatsby Purple",
-            "value": "#639"
-        },
-        {
-            "name": "Auth0 Orange",
-            "value": "#eb5424"
-        },
-        {
-            "name": "Azure Blue",
-            "value": "#007fff"
-        }
-    ],
-
     "peacock.favoriteColors": [
         {
             "name": "Angular Red",
@@ -458,7 +496,6 @@
             "value": "#42b883"
         }
     ],
-
     // SOP's highlight matching tag setting.
     "highlight-matching-tag.styles": {
         "opening": {
@@ -487,7 +524,7 @@
     "importCost.mediumPackageColor": "#B362FF",
     "importCost.smallPackageColor": "#B362FF",
     "[vue]": {
-        "editor.defaultFormatter": "octref.vetur"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[css]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -500,12 +537,133 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Palenight Italic",
+    "workbench.colorTheme": "Visual Studio Dark",
     /*LiveServer settings*/
     "liveServer.settings.host": "localhost",
-    "liveServer.settings.CustomBrowser": null,
-    "liveServer.settings.NoBrowser": true,
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.NoBrowser": false,
     "liveServer.settings.port": 9999,
-    "editor.formatOnPaste": true,
-    "editor.formatOnType": true
+    "liveServer.settings.donotShowInfoMsg": true,
+    /**
+  //--------------------------------------------------
+  // ** TODO HIGJLIGHT **
+  //--------------------------------------------------
+  */
+    "todohighlight.isEnable": true,
+    "todohighlight.isCaseSensitive": true,
+    "todohighlight.keywords": [
+        "DEBUG:",
+        "REVIEW:",
+        {
+            "text": "NOTE:",
+            "color": "#ff0000",
+            "backgroundColor": "yellow",
+            "overviewRulerColor": "grey"
+        },
+        {
+            "text": "HACK:",
+            "color": "#000",
+            "isWholeLine": false
+        },
+        {
+            "text": "TODO:",
+            "color": "red",
+            "border": "1px solid red",
+            "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
+            "backgroundColor": "rgba(0,0,0,.2)"
+            //other styling properties goes here ...
+        }
+    ],
+    // "todohighlight.keywordsPattern": "TODO:|FIXME:|\\(([^)]+)\\)", //highlight `TODO:`,`FIXME:` or content between parentheses
+    // "todohighlight.defaultStyle": {
+    // 	"color": "red",
+    // 	"backgroundColor": "#ffab00",
+    // 	"overviewRulerColor": "#ffab00",
+    // 	"cursor": "pointer",
+    // 	"border": "1px solid #eee",
+    // 	"borderRadius": "2px",
+    // 	"isWholeLine": true
+    //other styling properties goes here ...
+    // },
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.css",
+        "**/*.scss"
+    ],
+    "todohighlight.exclude": [
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/.vscode/**",
+        "**/.github/**",
+        "**/_output/**",
+        "**/*.min.*",
+        "**/*.map",
+        "**/.next/**"
+    ],
+    "todohighlight.maxFilesForSearch": 5120,
+    "todohighlight.toggleURI": false,
+    "gitlens.gitCommands.closeOnFocusOut": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    /**
+    //--------------------------------------------------
+    // ** RUBY **
+    //--------------------------------------------------
+    */
+    "ruby.useBundler": false, //run non-lint commands with bundle exec
+    "ruby.useLanguageServer": true, // use the internal language server (see below)
+    "ruby.lint": {
+        "rubocop": {
+            "useBundler": false // enable rubocop via bundler
+        },
+        "reek": {
+            "useBundler": true // enable reek via bundler
+        }
+    },
+    "ruby.format": "rubocop", // use rubocop for formatting
+    "[ruby]": {
+        "editor.tabSize": 2
+    },
+    "[php]": {
+        "editor.tabSize": 4
+    },
+    "python.pythonPath": "/usr/bin/python3",
+    "python.languageServer": "Microsoft",
+    "hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltdLFwiZm9ybWF0V2lkdGhcIjowLFwiY3JlYXRlVGFyZ2V0XCI6ZmFsc2UsXCJwYWdlRm9ybWF0XCI6e1wieFwiOjAsXCJ5XCI6MCxcIndpZHRoXCI6ODI3LFwiaGVpZ2h0XCI6MTE2OX0sXCJzZWFyY2hcIjp0cnVlLFwic2hvd1N0YXJ0U2NyZWVuXCI6dHJ1ZSxcImdyaWRDb2xvclwiOlwiI2QwZDBkMFwiLFwiZGFya0dyaWRDb2xvclwiOlwiIzZlNmU2ZVwiLFwiYXV0b3NhdmVcIjp0cnVlLFwicmVzaXplSW1hZ2VzXCI6bnVsbCxcIm9wZW5Db3VudGVyXCI6MCxcInZlcnNpb25cIjoxOCxcInVuaXRcIjoxLFwiaXNSdWxlck9uXCI6ZmFsc2UsXCJ1aVwiOlwiXCJ9In0=",
+    "kite.showWelcomeNotificationOnStartup": false,
+    // Very important: Install this plugin: https://github.com/be5invis/vscode-custom-css
+    // You'll need to change this to a file URI scheme on your computer: https://en.wikipedia.org/wiki/File_URI_scheme
+    // Mac/Linux: file:///Users/YOUR-PC-USERNAME/.vscodestyles.css
+    // Windows: file:///C:/Users/YOUR-PC-USERNAME/.vscodestyles.css
+    "vscode_custom_css.imports": [
+        "file:///Users/oluwasetemi/.vscodestyles.css"
+    ],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "auto-close-tag.activationOnLanguage": [
+        "xml",
+        "php",
+        "blade",
+        "ejs",
+        "jinja",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "plaintext",
+        "markdown",
+        "vue",
+        "liquid",
+        "erb",
+        "lang-cfml",
+        "cfml",
+        "HTML (Eex)",
+        "mdx"
+    ],
+    "liveServer.settings.donotVerifyTags": true
 }

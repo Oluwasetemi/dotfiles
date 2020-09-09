@@ -4,16 +4,12 @@
 [alias]
         lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
 [core]
-        editor = notepad
-[commit]
-    template = ~/.gitmessage
-(END)...skipping...
-[user]
-        name = Ojo Oluwasetemi
-        email = setemiojo@gmail.com
-[alias]
-        lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
-[core]
-        editor = notepad
-[commit]
-    template = ~/.gitmessage
+        editor = code
+[hub]
+	protocol = ssh
+[rerere]
+	autoupdate = true
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false

@@ -108,3 +108,7 @@ wix.vscode-import-cost
 yzhang.markdown-all-in-one
 
 [Setting Sync](https://gist.github.com/Oluwasetemi/40ba9fae99386ab07a9427b9f6e0c847)
+
+```sh
+npm i -g create-react-app eslint parcel fast gatsby netlify nodemon sails trash codesandbox create-gitignore blitz npkill
+```

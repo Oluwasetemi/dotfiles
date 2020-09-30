@@ -68,9 +68,11 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node nvm osx npm brew vscode)
+plugins=(git node nvm osx npm brew vscode osx zsh-autosuggestions gitignore gatsby)
 
 source $ZSH/oh-my-zsh.sh
+
+# gi is exposed from the gitignore plugin some of its command are gi list, gi [template], gi [template] >> .gitignore
 
 # include the z
 # . ~/../../usr/local/etc/profile.d/z.sh
@@ -123,7 +125,7 @@ alias gcod='git checkout develop'
 alias gcl='git clone'
 alias gd='git diff'
 alias gda='git diff HEAD'
-alias gi='git init'
+alias gin='git init'
 alias glg='git log --graph --oneline --decorate --all'
 alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
 alias gm='git merge --no-ff'
@@ -143,6 +145,26 @@ alias gsts='git stash save'
 
 # open all merge conflict orcurrently changed files in VScode
 alias fix="git diff --name-only | uniq | xargs code"
+
+# Changed your .gitignore _after_ you have added / committed some files?
+# run `gri` to untrack anything in your updated .gitignore
+# Put this in your .zshrc file
+alias gri="git ls-files --ignored --exclude-standard | xargs -0 git rm -r"
+
+# alias 🖕😏🖕="git push --force"
+
+alias "git latest"="git for-each-ref --sort=-committerdate refs/heads/"
+
+# I don't think I use this anymore https://github.com/pindexis/qfc
+# [[ -s "$HOME/.qfc/bin/qfc.sh" ]] && source "$HOME/.qfc/bin/qfc.sh"
+
+#  Uses tree - install first:
+# brew install tree
+function t() {
+  # Defaults to 3 levels deep, do more with `t 5` or `t 1`
+  # pass additional args after
+  tree -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2
+}
 
 #-------------------------
 # File Directory Alias
@@ -165,7 +187,7 @@ alias pg="echo 'Pinging Google' && ping www.google.com";
 alias cb="code ~/.bashrc";
 alias cz="code ~/.zshrc";
 alias cg="code ~/.gitconfig";
-alias vsc="code .";
+# alias vsc="code .";
 alias reload="source ~/.bashrc";
 alias rld="source ~/.zshrc";
 
@@ -174,7 +196,7 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias wk="cd ~/Development/data-savvy"
 alias pra="cd ~/Development/projects"
-# alias sp="cd ~/SideProjects"
+alias sp="cd ~/Development/projects/contractors"
 alias blog="cd ~/Development/projects/oluwasetemi.github.io && code ."
 alias blog2="cd ~/Development/projects/oluwasetemi.dev && code ."
 alias espanso-config="cd ~/Library/Preferences/espanso && code default.yml"
@@ -516,3 +538,32 @@ export PATH=/usr/bin/python3:$PATH
 
 # set up bfg
 alias bfg='java -jar ~/bfg.jar'
+
+# zsh hooks `precmd`
+precmd() {
+  if [ "$PWD" = "/Users/oluwasetemi/Development/projects" ] \
+  && [[ $(nvm current) = ^v12* ]]
+  then
+    nvm use 12
+  fi
+}
+
+export RW_PATH=”$HOME/Development/projects/redwoodjs/redwood”
+
+# Take a screenshot every n seconds
+# Fun for making timelapse gifs later
+# run `creep 20` for every 20 seconds
+function creep() {
+    while :; do; echo "📸" $(date +%H:%M:%S); screencapture -x ~/Screenshots/oluwasetemi/$(date +%s).png; sleep $1; done
+}
+
+COMPLETION_WAITING_DOTS="true"
+
+set-window-title() {
+  window_title="\e]0;${${PWD/#"$HOME"/~}/Dropbox\//}\a"
+  echo -ne "$window_title"
+}
+
+PR_TITLEBAR=''
+set-window-title
+add-zsh-hook precmd set-window-title

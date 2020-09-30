@@ -1,12 +1,11 @@
 {
     "breadcrumbs.enabled": true,
     /**
-    //--------------------------------------------------
-    // ** EDITOR **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** EDITOR **
+      //--------------------------------------------------
+      */
     "editor.fontFamily": "'Operator Mono','Dank Mono', 'fira code light', monaco, Monoid, Hermit Light, Consolas",
-    // "editor.formatOnSave": true,
     "editor.wordWrap": "on",
     "editor.fontSize": 12,
     "editor.cursorStyle": "line",
@@ -20,15 +19,12 @@
     "editor.glyphMargin": true,
     "editor.letterSpacing": 0.3,
     "editor.renderWhitespace": "none",
-    "editor.rulers": [
-        80,
-        100,
-        120
-    ],
+    "editor.rulers": [80, 100, 120],
     "editor.minimap.enabled": false,
     "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "editor.formatOnType": true,
+    "editor.formatOnSaveMode": "modifications",
+    // "editor.formatOnPaste": true,
+    // "editor.formatOnType": true,
     "editor.gotoLocation.multipleDefinitions": "goto",
     "editor.renderControlCharacters": false,
     "editor.smoothScrolling": true,
@@ -41,9 +37,10 @@
     "editor.fontLigatures": true,
     "editor.tabCompletion": "on",
     "editor.lineNumbers": "on",
+    "editor.showUnused": true,
     // The number of spaces a tab is equal to. This setting is overridden
     // based on the file contents when `editor.detectIndentation` is true.
-    "editor.tabSize": 2,
+    "editor.tabSize": 4,
     // Insert spaces when pressing Tab. This setting is overriden
     // based on the file contents when `editor.detectIndentation` is true.
     "editor.insertSpaces": true,
@@ -55,125 +52,101 @@
     "editor.semanticHighlighting.enabled": true,
     "editor.renameOnType": true,
     /**
-    //--------------------------------------------------
-    // ** EDITOR COLOR **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** EDITOR COLOR **
+      //--------------------------------------------------
+      */
     "editor.tokenColorCustomizations": {},
     // turn it off for JS and JSX, we will do this via eslint
     "editor.codeActionsOnSave": {
-        "source.fixAll": false,
-        // allow eslint to fix auto fixable code on autosave
-        "source.fixAll.eslint": true,
-        "source.organizeImports": true,
-        "source.fixAll.tslint": true,
-        "source.fixAll.stylelint": true
+      "source.fixAll": false,
+      // allow eslint to fix auto fixable code on autosave
+      "source.fixAll.eslint": true,
+      "source.organizeImports": true,
+      "source.addMissingImports": true,
+      "source.fixAll.tslint": true,
+      "source.fixAll.stylelint": true
     },
     "[javascript]": {
-        "editor.formatOnSave": false,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.autoIndent": "advanced",
-        "editor.showUnused": true
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.autoIndent": "advanced",
+      "editor.showUnused": true
     },
     "[javascriptreact]": {
-        "editor.formatOnSave": false,
-        "editor.showUnused": true
+      "editor.formatOnSave": false,
+      "editor.showUnused": true
     },
     /**
-    //--------------------------------------------------
-    // ** ESLINT **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** ESLINT **
+      //--------------------------------------------------
+      */
     "eslint.run": "onSave",
     // "eslint.autoFixOnSave": true,
     "eslint.alwaysShowStatus": true,
     "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact"
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
     ],
-    "eslint.options": {
-        "extensions": [
-            ".js",
-            ".jsx",
-            ".md",
-            ".mdx",
-            ".ts",
-            ".tsx"
-        ],
-        "env": {
-            "browser": true,
-            "jest/globals": true,
-            "es6": true
-        },
-        "parserOptions": {
-            "ecmaVersion": 2020,
-            "sourceType": "module",
-            "ecmaFeatures": {
-                "jsx": true
-            }
-        },
-        "rules": {
-            "no-debugger": "off"
-            // "semi": [1, "always"]
-        }
-    },
     /**
-    //--------------------------------------------------
-    // ** EMMET **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** EMMET **
+      //--------------------------------------------------
+      */
     "emmet.includeLanguages": {
-        "javascript": "javascriptreact",
-        "markdown": "html",
-        "vue-html": "html",
-        "markdownreact": "html",
-        "mdx": "html"
+      "javascript": "javascriptreact",
+      "markdown": "html",
+      "vue-html": "html",
+      "markdownreact": "html",
+      "mdx": "html"
     },
     "emmet.excludeLanguages": [],
     /**
-    //--------------------------------------------------
-    // ** FILES **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** FILES **
+      //--------------------------------------------------
+      */
     "files.exclude": {
-        "USE_GITIGNORE": true,
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/.next": true,
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
+      "USE_GITIGNORE": true,
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/.next": true,
+      "**/.classpath": true,
+      "**/.project": true,
+      "**/.settings": true,
+      "**/.factorypath": true
     },
-    "files.autoSave": "onFocusChange",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay":5000,
     "files.associations": {
-        "*.ejs": "html",
-        "*.jsx": "javascriptreact",
-        "*.md": "markdown",
-        ".lintstagedrc": "json",
-        ".bash_profile": "shellscript"
+      "*.ejs": "html",
+      "*.jsx": "javascriptreact",
+      "*.md": "markdown",
+      ".lintstagedrc": "json",
+      ".bash_profile": "shellscript"
     },
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "files.eol": "\n",
     /**
-    //--------------------------------------------------
-    // ** HTML **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** HTML **
+      //--------------------------------------------------
+      */
     "html.format.indentInnerHtml": true,
     "html.format.enable": true,
     "html.format.preserveNewLines": true,
     /**
-    //--------------------------------------------------
-    // ** WORKBENCH **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** WORKBENCH **
+      //--------------------------------------------------
+      */
     "workbench.editor.showTabs": true,
     // this lets you quickly open multiple items in a row and not have the previous ones closed on you
     "workbench.editor.enablePreviewFromQuickOpen": true,
@@ -186,85 +159,78 @@
     "workbench.tips.enabled": false,
     // "workbench.dailogs.useSimplified": true,
     /**
-    //--------------------------------------------------
-    // ** WORKBENCH COLOR **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** WORKBENCH COLOR **
+      //--------------------------------------------------
+      */
     "workbench.colorCustomizations": {
-        "terminal.foreground": "#FAD000",
-        "editorLineNumber.foreground": "#FAD000",
-        "editorLineNumber.activeForeground": "#7700ff",
-        "menu.separatorBackground": "#c25a63",
-        "inputValidation.infoForeground": "#00ff00",
-        "inputValidation.warningForeground": "#ffd500",
-        "inputValidation.errorForeground": "#ff0000",
-        "editorCursor.foreground": "#ff0000",
-        "editor.snippetTabstopHighlightBackground": "#369",
-        "editor.snippetTabstopHighlightBorder": "#583399",
-        "editor.snippetFinalTabstopHighlightBackground": "#3d9933",
-        "editor.snippetFinalTabstopHighlightBorder": "#5c12db"
-        // "activityBar.inactiveForeground": "#000",
-        // "tab.inactiveBackground": "#f7d958",
-        // "tab.inactiveForeground": "#d64b0a"
+      "terminal.foreground": "#FAD000",
+      "editorLineNumber.foreground": "#FAD000",
+      "editorLineNumber.activeForeground": "#7700ff",
+      "menu.separatorBackground": "#c25a63",
+      "inputValidation.infoForeground": "#00ff00",
+      "inputValidation.warningForeground": "#ffd500",
+      "inputValidation.errorForeground": "#ff0000",
+      "editorCursor.foreground": "#ff0000",
+      "editor.snippetTabstopHighlightBackground": "#369",
+      "editor.snippetTabstopHighlightBorder": "#583399",
+      "editor.snippetFinalTabstopHighlightBackground": "#3d9933",
+      "editor.snippetFinalTabstopHighlightBorder": "#5c12db"
+      // "activityBar.inactiveForeground": "#000",
+      // "tab.inactiveBackground": "#f7d958",
+      // "tab.inactiveForeground": "#d64b0a"
     },
     /**
-    //--------------------------------------------------
-    // ** WINDOW **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** WINDOW **
+      //--------------------------------------------------
+      */
     "window.newWindowDimensions": "inherit",
     "window.zoomLevel": 0,
     "window.titleBarStyle": "custom",
     /**
-    //--------------------------------------------------
-    // ** PRETTIER **
-    //--------------------------------------------------
-    */
-    // "prettier.eslint": true,
+      //--------------------------------------------------
+      // ** PRETTIER **
+      //--------------------------------------------------
+      */
     // "prettier.bracketSpacing": true,
-    // "prettier.trailingComma": "all",
+    // "prettier.printWidth": 80,
+    // "prettier.tabWidth": 4,
     // "prettier.singleQuote": true,
-    "prettier.bracketSpacing": true,
-    "prettier.printWidth": 80,
-    "prettier.tabWidth": 4,
-    "prettier.singleQuote": true,
-    "prettier.trailingComma": "all",
-    "prettier.jsxBracketSameLine": false,
-    "prettier.semi": true,
-    "prettier.useTabs": true,
-    "prettier.proseWrap": "always",
+    // "prettier.trailingComma": "all",
+    // "prettier.jsxBracketSameLine": false,
+    // "prettier.semi": true,
+    // "prettier.useTabs": true,
+    // "prettier.proseWrap": "always",
     // Optional BUT IMPORTANT: If you have the prettier extension enabled for other languages like CSS and HTML, turn it off for JS since we are doing it through Eslint already
-    "prettier.disableLanguages": [
-        "javascript",
-        "javascriptreact"
-    ],
+    // "prettier.disableLanguages": ["javascript", "javascriptreact"],
     // show snippets before any other auto completion
     /**
-    //--------------------------------------------------
-    // ** EXPLORER **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** EXPLORER **
+      //--------------------------------------------------
+      */
     "explorer.openEditors.visible": 0,
     /**
-    //--------------------------------------------------
-    // ** CSS **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** CSS **
+      //--------------------------------------------------
+      */
     "css.lint.zeroUnits": "ignore",
     /**
-    //--------------------------------------------------
-    // ** JAVASCRIPT **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** JAVASCRIPT **
+      //--------------------------------------------------
+      */
     "javascript.updateImportsOnFileMove.enabled": "always",
     "javascript.suggest.autoImports": true,
     "javascript.validate.enable": false,
     "javascript.preferences.quoteStyle": "auto",
     /**
-    //--------------------------------------------------
-    // ** TERMINAL **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** TERMINAL **
+      //--------------------------------------------------
+      */
     "terminal.integrated.fontFamily": "'Fira Code', monaco, 'Anonymous Pro', monoid,'Envy Code R', monospace",
     "terminal.integrated.fontSize": 12,
     "terminal.integrated.lineHeight": 1.2,
@@ -280,65 +246,65 @@
     "terminal.integrated.automationShell.osx": "/bin/sh",
     "terminal.integrated.shellArgs.osx": [],
     /**
-    //--------------------------------------------------
-    // ** MARKDOWN **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** MARKDOWN **
+      //--------------------------------------------------
+      */
     "markdown.preview.fontFamily": " 'Ubuntu', 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light' , 'Droid Sans', sans-serif",
     "markdown.preview.fontSize": 12,
     "[markdown]": {
-        "editor.codeLens": true,
-        "editor.wordWrap": "on",
-        // changed 1.41 release
-        "editor.autoIndent": "advanced",
-        "editor.fontLigatures": true,
-        "editor.quickSuggestions": true,
-        "editor.emptySelectionClipboard": false,
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+      "editor.codeLens": true,
+      "editor.wordWrap": "on",
+      // changed 1.41 release
+      "editor.autoIndent": "advanced",
+      "editor.fontLigatures": true,
+      "editor.quickSuggestions": true,
+      "editor.emptySelectionClipboard": false,
+      "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
     "markdownlint.config": {
-        "no-empty-links": false,
-        "code": true,
-        "fenced-code-language": true,
-        "language": true,
-        "no-duplicate-header": true,
-        "atx": true
+      "no-empty-links": false,
+      "code": true,
+      "fenced-code-language": true,
+      "language": true,
+      "no-duplicate-header": true,
+      "atx": true
     },
     /**
-    //--------------------------------------------------
-    // ** DEBUG **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** DEBUG **
+      //--------------------------------------------------
+      */
     "phpcs.enable": true,
     "phpcs.composerJsonPath": "composer.json",
     "phpcs.executablePath": "/Users/oluwasetemi/.composer/vendor/bin/phpcs",
     /**
-    //--------------------------------------------------
-    // ** DEBUG **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** DEBUG **
+      //--------------------------------------------------
+      */
     "debug.node.autoAttach": "on",
     "debug.toolBarLocation": "floating",
     "debug.openDebug": "openOnSessionStart",
     "debug.openExplorerOnEnd": false,
     "debug.showInStatusBar": "always",
     /**
-    //--------------------------------------------------
-    // ** EXTENSIONS **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** EXTENSIONS **
+      //--------------------------------------------------
+      */
     "auto-rename-tag.activationOnLanguage": [
-        "html",
-        "xml",
-        "javascript",
-        "javascriptreact"
+      "html",
+      "xml",
+      "javascript",
+      "javascriptreact"
     ],
     "gitlens.keymap": "alternate",
     "gitlens.advanced.messages": {
-        "suppressFileNotUnderSourceControlWarning": true,
-        "suppressResultsExplorerNotice": true,
-        "suppressShowKeyBindingsNotice": true,
-        "suppressWelcomeNotice": true
+      "suppressFileNotUnderSourceControlWarning": true,
+      "suppressResultsExplorerNotice": true,
+      "suppressShowKeyBindingsNotice": true,
+      "suppressWelcomeNotice": true
     },
     "git.autofetch": true,
     "git.enableSmartCommit": true,
@@ -352,192 +318,199 @@
     // "local-history.path": "./.vscode-history",
     "grunt.autoDetect": "off",
     /**
-    //--------------------------------------------------
-    // ** NPM **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** NPM **
+      //--------------------------------------------------
+      */
     "npm.runSilent": true,
-    "npm.enableScriptExplorer": true,
     "gulp.autoDetect": "off",
     "search.exclude": {
-        "**/node_modules": true,
-        "**/bower_components": true,
-        "**/coverage": true,
-        "**/dist": true,
-        "**/build": true,
-        "**/.build": true,
-        "**/.gh-pages": true
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/coverage": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.build": true,
+      "**/.gh-pages": true
     },
     "cSpell.userWords": [
-        "Equilibra",
-        "Freecodecamp",
-        "Kubernetes",
-        "Mixins",
-        "Oluwasetemi",
-        "Oluwasetemi's",
-        "Osogbo",
-        "PERMISSIONUPDATE",
-        "Signout",
-        "Spotify",
-        "Validators",
-        "Workcation",
-        "autopopulate",
-        "backticks",
-        "clickoutside",
-        "currentuser",
-        "destructure",
-        "destructured",
-        "devtool",
-        "dompurify",
-        "espanso",
-        "firstname",
-        "ghpages",
-        "graphiql",
-        "graphql",
-        "gravatar",
-        "hacky",
-        "inprogress",
-        "lastname",
-        "linebreak",
-        "localstorage",
-        "mailtrap",
-        "maxlength",
-        "microservice",
-        "middlewares",
-        "mimetype",
-        "minlength",
-        "minmax",
-        "mydate",
-        "natterbase",
-        "originalname",
-        "paystack",
-        "precommit",
-        "prepending",
-        "promisification",
-        "promisify",
-        "pubsub",
-        "purgecss",
-        "refetch",
-        "signup",
-        "stacktraces",
-        "subcomponent",
-        "tabindex",
-        "tailwindcss",
-        "totalearned",
-        "virtuals"
+      "Appointmentenum",
+      "Blogpost",
+      "Equilibra",
+      "Freecodecamp",
+      "Kubernetes",
+      "Leaderboard",
+      "Mixins",
+      "Oluwasetemi",
+      "Oluwasetemi's",
+      "Osogbo",
+      "PERMISSIONUPDATE",
+      "Promisified",
+      "SUPERADMIN",
+      "Signout",
+      "Spotify",
+      "Validators",
+      "Workcation",
+      "autopopulate",
+      "backticks",
+      "chooselife",
+      "clickoutside",
+      "contentful",
+      "currentuser",
+      "datetime",
+      "destructure",
+      "destructured",
+      "devtool",
+      "dompurify",
+      "espanso",
+      "firstname",
+      "ghpages",
+      "graphiql",
+      "graphql",
+      "gravatar",
+      "hacky",
+      "inbody",
+      "inprogress",
+      "lastname",
+      "linebreak",
+      "localstorage",
+      "mailtrap",
+      "maxlength",
+      "microservice",
+      "middlewares",
+      "mimetype",
+      "mindshift",
+      "minlength",
+      "minmax",
+      "mydate",
+      "natterbase",
+      "originalname",
+      "paystack",
+      "precommit",
+      "prepending",
+      "promisification",
+      "promisify",
+      "pubsub",
+      "purgecss",
+      "refetch",
+      "signup",
+      "stacktraces",
+      "subcomponent",
+      "tabindex",
+      "tailwindcss",
+      "totalearned",
+      "virtuals"
     ],
     "sync.removeExtensions": false,
     "sync.syncExtensions": true,
     "[json]": {
-        "editor.quickSuggestions": {
-            "strings": true,
-            "comments": true
-        },
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.quickSuggestions": {
+        "strings": true,
+        "comments": true
+      },
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "java.errors.incompleteClasspath.severity": "ignore",
     "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-    "files.autoSaveDelay": 5000,
     "peacock.affectActivityBar": true,
     "peacock.affectStatusBar": true,
     "peacock.favoriteColors": [
-        {
-            "name": "Angular Red",
-            "value": "#b52e31"
-        },
-        {
-            "name": "Auth0 Orange",
-            "value": "#eb5424"
-        },
-        {
-            "name": "Azure Blue",
-            "value": "#007fff"
-        },
-        {
-            "name": "C# Purple",
-            "value": "#68217A"
-        },
-        {
-            "name": "Gatsby Purple",
-            "value": "#639"
-        },
-        {
-            "name": "Go Cyan",
-            "value": "#5dc9e2"
-        },
-        {
-            "name": "Java Blue-Gray",
-            "value": "#557c9b"
-        },
-        {
-            "name": "JavaScript Yellow",
-            "value": "#f9e64f"
-        },
-        {
-            "name": "Mandalorian Blue",
-            "value": "#1857a4"
-        },
-        {
-            "name": "Node Green",
-            "value": "#215732"
-        },
-        {
-            "name": "React Blue",
-            "value": "#00b3e6"
-        },
-        {
-            "name": "Something Different",
-            "value": "#832561"
-        },
-        {
-            "name": "Vue Green",
-            "value": "#42b883"
-        }
+      {
+        "name": "Angular Red",
+        "value": "#b52e31"
+      },
+      {
+        "name": "Auth0 Orange",
+        "value": "#eb5424"
+      },
+      {
+        "name": "Azure Blue",
+        "value": "#007fff"
+      },
+      {
+        "name": "C# Purple",
+        "value": "#68217A"
+      },
+      {
+        "name": "Gatsby Purple",
+        "value": "#639"
+      },
+      {
+        "name": "Go Cyan",
+        "value": "#5dc9e2"
+      },
+      {
+        "name": "Java Blue-Gray",
+        "value": "#557c9b"
+      },
+      {
+        "name": "JavaScript Yellow",
+        "value": "#f9e64f"
+      },
+      {
+        "name": "Mandalorian Blue",
+        "value": "#1857a4"
+      },
+      {
+        "name": "Node Green",
+        "value": "#215732"
+      },
+      {
+        "name": "React Blue",
+        "value": "#00b3e6"
+      },
+      {
+        "name": "Something Different",
+        "value": "#832561"
+      },
+      {
+        "name": "Vue Green",
+        "value": "#42b883"
+      }
     ],
     // SOP's highlight matching tag setting.
     "highlight-matching-tag.styles": {
-        "opening": {
-            "full": {
-                "custom": {
-                    "backgroundColor": "rgba(165, 153, 233, 0.1)"
-                },
-                "underline": "#ffc600"
-            },
-            "left": {
-                "custom": {
-                    "borderWidth": "1"
-                },
-                "underline": "#ffc600"
-            },
-            "right": {
-                "custom": {
-                    "borderWidth": "1"
-                },
-                "underline": "#ffc600"
-            }
+      "opening": {
+        "full": {
+          "custom": {
+            "backgroundColor": "rgba(165, 153, 233, 0.1)"
+          },
+          "underline": "#ffc600"
+        },
+        "left": {
+          "custom": {
+            "borderWidth": "1"
+          },
+          "underline": "#ffc600"
+        },
+        "right": {
+          "custom": {
+            "borderWidth": "1"
+          },
+          "underline": "#ffc600"
         }
+      }
     },
     // SOP's Import Cost Extension Settings.
     "importCost.largePackageColor": "#EC3A37F5",
     "importCost.mediumPackageColor": "#B362FF",
     "importCost.smallPackageColor": "#B362FF",
     "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "vsintellicode.modify.editor.suggestSelection": "choseToUpdateConfiguration",
     "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Visual Studio Dark",
     /*LiveServer settings*/
     "liveServer.settings.host": "localhost",
     "liveServer.settings.CustomBrowser": "chrome",
@@ -545,34 +518,34 @@
     "liveServer.settings.port": 9999,
     "liveServer.settings.donotShowInfoMsg": true,
     /**
-  //--------------------------------------------------
-  // ** TODO HIGJLIGHT **
-  //--------------------------------------------------
-  */
+    //--------------------------------------------------
+    // ** TODO HIGJLIGHT **
+    //--------------------------------------------------
+    */
     "todohighlight.isEnable": true,
     "todohighlight.isCaseSensitive": true,
     "todohighlight.keywords": [
-        "DEBUG:",
-        "REVIEW:",
-        {
-            "text": "NOTE:",
-            "color": "#ff0000",
-            "backgroundColor": "yellow",
-            "overviewRulerColor": "grey"
-        },
-        {
-            "text": "HACK:",
-            "color": "#000",
-            "isWholeLine": false
-        },
-        {
-            "text": "TODO:",
-            "color": "red",
-            "border": "1px solid red",
-            "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
-            "backgroundColor": "rgba(0,0,0,.2)"
-            //other styling properties goes here ...
-        }
+      "DEBUG:",
+      "REVIEW:",
+      {
+        "text": "NOTE:",
+        "color": "#ff0000",
+        "backgroundColor": "yellow",
+        "overviewRulerColor": "grey"
+      },
+      {
+        "text": "HACK:",
+        "color": "#000",
+        "isWholeLine": false
+      },
+      {
+        "text": "TODO:",
+        "color": "red",
+        "border": "1px solid red",
+        "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
+        "backgroundColor": "rgba(0,0,0,.2)"
+        //other styling properties goes here ...
+      }
     ],
     // "todohighlight.keywordsPattern": "TODO:|FIXME:|\\(([^)]+)\\)", //highlight `TODO:`,`FIXME:` or content between parentheses
     // "todohighlight.defaultStyle": {
@@ -586,52 +559,52 @@
     //other styling properties goes here ...
     // },
     "todohighlight.include": [
-        "**/*.js",
-        "**/*.jsx",
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.html",
-        "**/*.php",
-        "**/*.css",
-        "**/*.scss"
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.html",
+      "**/*.php",
+      "**/*.css",
+      "**/*.scss"
     ],
     "todohighlight.exclude": [
-        "**/node_modules/**",
-        "**/bower_components/**",
-        "**/dist/**",
-        "**/build/**",
-        "**/.vscode/**",
-        "**/.github/**",
-        "**/_output/**",
-        "**/*.min.*",
-        "**/*.map",
-        "**/.next/**"
+      "**/node_modules/**",
+      "**/bower_components/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.vscode/**",
+      "**/.github/**",
+      "**/_output/**",
+      "**/*.min.*",
+      "**/*.map",
+      "**/.next/**"
     ],
     "todohighlight.maxFilesForSearch": 5120,
     "todohighlight.toggleURI": false,
     "gitlens.gitCommands.closeOnFocusOut": true,
     "vsicons.dontShowNewVersionMessage": true,
     /**
-    //--------------------------------------------------
-    // ** RUBY **
-    //--------------------------------------------------
-    */
+      //--------------------------------------------------
+      // ** RUBY **
+      //--------------------------------------------------
+      */
     "ruby.useBundler": false, //run non-lint commands with bundle exec
     "ruby.useLanguageServer": true, // use the internal language server (see below)
     "ruby.lint": {
-        "rubocop": {
-            "useBundler": false // enable rubocop via bundler
-        },
-        "reek": {
-            "useBundler": true // enable reek via bundler
-        }
+      "rubocop": {
+        "useBundler": false // enable rubocop via bundler
+      },
+      "reek": {
+        "useBundler": true // enable reek via bundler
+      }
     },
     "ruby.format": "rubocop", // use rubocop for formatting
     "[ruby]": {
-        "editor.tabSize": 2
+      "editor.tabSize": 2
     },
     "[php]": {
-        "editor.tabSize": 4
+      "editor.tabSize": 4
     },
     "python.pythonPath": "/usr/bin/python3",
     "python.languageServer": "Microsoft",
@@ -641,29 +614,31 @@
     // You'll need to change this to a file URI scheme on your computer: https://en.wikipedia.org/wiki/File_URI_scheme
     // Mac/Linux: file:///Users/YOUR-PC-USERNAME/.vscodestyles.css
     // Windows: file:///C:/Users/YOUR-PC-USERNAME/.vscodestyles.css
-    "vscode_custom_css.imports": [
-        "file:///Users/oluwasetemi/.vscodestyles.css"
-    ],
+    "vscode_custom_css.imports": ["file:///Users/oluwasetemi/.vscodestyles.css"],
     "diffEditor.ignoreTrimWhitespace": false,
     "auto-close-tag.activationOnLanguage": [
-        "xml",
-        "php",
-        "blade",
-        "ejs",
-        "jinja",
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-        "plaintext",
-        "markdown",
-        "vue",
-        "liquid",
-        "erb",
-        "lang-cfml",
-        "cfml",
-        "HTML (Eex)",
-        "mdx"
+      "xml",
+      "php",
+      "blade",
+      "ejs",
+      "jinja",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "plaintext",
+      "markdown",
+      "vue",
+      "liquid",
+      "erb",
+      "lang-cfml",
+      "cfml",
+      "HTML (Eex)",
+      "mdx"
     ],
-    "liveServer.settings.donotVerifyTags": true
-}
+    "liveServer.settings.donotVerifyTags": true,
+    //
+    "screencastMode.keyboardOverlayTimeout": 500,
+    "screencastMode.mouseIndicatorColor": "#FF0000",
+    "screencastMode.mouseIndicatorSize": 20
+  }

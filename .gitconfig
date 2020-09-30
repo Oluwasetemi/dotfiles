@@ -4,7 +4,7 @@
 [alias]
         lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
 [core]
-        editor = code
+        editor = code --wait
 [hub]
 	protocol = ssh
 [rerere]
@@ -13,3 +13,7 @@
 	defaultBranch = main
 [pull]
 	rebase = false
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = "code --wait --diff $LOCAL $REMOTE"

@@ -49,7 +49,6 @@ jkjustjoshing.vscode-text-pastry
 johnpapa.vscode-peacock
 JounQin.vscode-mdx
 jpoissonnier.vscode-styled-components
-kiteco.kite
 kumar-harsh.graphql-for-vscode
 maty.vscode-mocha-sidebar
 mgmcdermott.vscode-language-babel

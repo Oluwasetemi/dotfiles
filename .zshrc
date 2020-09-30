@@ -567,3 +567,6 @@ set-window-title() {
 PR_TITLEBAR=''
 set-window-title
 add-zsh-hook precmd set-window-title
+
+# List all vscode extensions
+function list_vsc_extensions () { code --list-extensions; }

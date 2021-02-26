@@ -163,7 +163,7 @@ alias "git latest"="git for-each-ref --sort=-committerdate refs/heads/"
 function t() {
   # Defaults to 3 levels deep, do more with `t 5` or `t 1`
   # pass additional args after
-  tree -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2
+  tree -I '.git|node_modules|bower_components|.DS_Store|public' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2
 }
 
 #-------------------------
@@ -197,8 +197,9 @@ alias dt="cd ~/Desktop"
 alias wk="cd ~/Development/data-savvy"
 alias pra="cd ~/Development/projects"
 alias sp="cd ~/Development/projects/contractors"
-alias blog="cd ~/Development/projects/oluwasetemi.github.io && code ."
-alias blog2="cd ~/Development/projects/oluwasetemi.dev && code ."
+alias blog="cd ~/Development/projects/gatsbyjs/oluwasetemi.github.io && code ."
+alias cv="cd ~/Development/projects/personal/cv && code ."
+alias dev="cd ~/Development/projects/gatsbyjs/oluwasetemi.dev && code ."
 alias espanso-config="cd ~/Library/Preferences/espanso && code default.yml"
 
 
@@ -219,9 +220,9 @@ alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 # PROMPT STUFF
 #------------------------
 
-# GREEN=$(tput setaf 2);
-# YELLOW=$(tput setaf 3);
-# RESET=$(tput sgr0);
+GREEN=$(tput setaf 2);
+YELLOW=$(tput setaf 3);
+RESET=$(tput sgr0);
 
 function git_branch {
 
@@ -342,7 +343,8 @@ alias yoff="yarn add --offline";
 alias ypm="echo \"Installing deps without lockfile and ignoring engines\" && yarn install --no-lockfile --ignore-engines"
 
 ## use hub for git
-alias git=hub
+# alias git=hub
+eval "$(hub alias -s)"
 
 # ## use pip for pip3
 # alias pip=pip3
@@ -506,7 +508,7 @@ downloadSong () {
 }
 
 # setup fuck for the use of correcting mis-spelt terminal instructions by just typing fuck after a mis-spelt command
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
@@ -570,3 +572,381 @@ add-zsh-hook precmd set-window-title
 
 # List all vscode extensions
 function list_vsc_extensions () { code --list-extensions; }
+
+# List the 10 most frequently used command
+function historyTop () { history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 }
+
+# This is a bunch of shell scripts for Debian and derivatives containing aliases and useful functions aiming to deliver increased productivity.
+# source $HOME/workspace/bash-scripts/bash-scripts/bashrc
+
+function textLowerFirst() {
+  local string="$1"
+  local first=`echo $string|cut -c1|tr [A-Z] [a-z]`
+  local second=`echo $string|cut -c2-`
+  echo $first$second
+}
+
+##
+## utilities for simple text transformations
+##
+
+function upper {
+    tr [:lower:] [:upper:] $*
+}
+
+function lower {
+    tr [:upper:] [:lower:] $*
+}
+
+function trim {
+    tr -d [:blank:] $*
+}
+
+function capitalize {
+    sed -E 's/[^ \t]*/\u&/g' $*
+}
+
+function camelCase {
+    sed -E 's/[^ \t]*/\u&/g' | sed -E 's/[ \t]*//g' | sed -E 's/[^ \t]*/\l&/g' $*
+}
+
+function chopLeft {
+    local -i n=${1}
+    local -i n=${n:=0}
+    while read line ;do
+      echo ${line:${n}}
+    done
+}
+
+function chopRight {
+    local -i n=${1}
+    local -i n=${n:=0}
+    while read line ;do
+      echo ${line::${#line}-${n}}
+    done
+}
+
+function mkString {
+    local sep=${1}
+    local sep=${sep:=,}
+    paste -sd${sep}
+}
+
+##
+## utilities for JSON and YAML processing
+##
+
+function yaml_validate {
+  python -c 'import sys, yaml, json; yaml.safe_load(sys.stdin.read())'
+}
+
+function yaml2json {
+  python -c 'import sys, yaml, json; print(json.dumps(yaml.safe_load(sys.stdin.read())))'
+}
+
+function yaml2json_pretty {
+  python -c 'import sys, yaml, json; print(json.dumps(yaml.safe_load(sys.stdin.read()), indent=2, sort_keys=False))'
+}
+
+function json_validate {
+  python -c 'import sys, yaml, json; json.loads(sys.stdin.read())'
+}
+
+function json2yaml {
+  python -c 'import sys, yaml, json; print(yaml.dump(json.loads(sys.stdin.read()), sort_keys=False))'
+}
+
+function yaml_split {
+  for file in "$@" ;do
+    local dir=$(dirname "${file}")
+    local name=$(basename "${file}" .yaml)
+    csplit --quiet --prefix="${dir}/${name}" --suffix-format='.%03d.yaml.part' --elide-empty-files "${file}" /---/ "{*}"
+    for f in "${dir}/${name}".*.yaml.part ; do
+        local kind=$(cat $f | yaml2json | jq .kind | sed 's/"//g')
+        local count=$(basename "$f" | cut -d. -f 2)
+        local fname=${name}.${count}.${kind}.yaml
+        ## echo "${f} -> ${fname}"
+        tail +2 $f > "${dir}/${fname}"
+        rm $f
+    done
+  done
+}
+
+
+##
+## viewing file differences
+##
+
+function cdiff {
+    diff -Naur $*
+}
+function sdiff {
+    diff -Npry $*
+}
+function kdiff {
+    kdiff3 $*
+}
+function vdiff {
+    diffuse $*
+}
+
+
+##
+## finding files easily
+##
+
+function fffile {
+    fd -I $*
+}
+
+function ffdir {
+    fd -I -t d $*
+}
+
+function ffscala {
+    fd -I -e scala $*
+}
+
+function ffdhall {
+    fd -I -e dhall $*
+}
+
+function  ffjava {
+    fd -I -e java $*
+}
+
+function   ffsbt {
+    fd -I -e sbt $*
+}
+
+function   ffxml {
+    fd -I -e xml $*
+}
+
+function   ffant {
+    fd -I -e ant $*
+}
+
+function   ffpom {
+    fd -I -e pom $*
+}
+
+function   fftxt {
+    fd -I -e txt $*
+}
+
+function    ffel {
+    fd -I -e el $*
+}
+
+function    ffrs {
+    fd -I -e rs $*
+}
+
+function    ffpy {
+    fd -I -e py $*
+}
+
+function    ffsh {
+    fd -I -e sh $*
+}
+
+function    ffmd {
+    fd -I -e md $*
+}
+
+function   ffrst {
+    fd -I -e rst $*
+}
+
+function    ffts {
+    fd -I -e ts $*
+}
+
+function    ffjs {
+    fd -I -e js $*
+}
+
+function  ffjson {
+    fd -I -e json $*
+}
+
+function   ffcss {
+    fd -I -e css $*
+}
+
+function  ffform {
+    fd -I -e form $*
+}
+
+function  ffconf {
+    fd -I -e cfg -e conf -e config -e ini $*
+}
+
+function   ffyaml {
+    fd -I -e yml -e yaml $*
+}
+
+function  fftoml {
+    fd -I -e toml $*
+}
+
+function   ffcpp {
+    fd -I -e c -e h -e cpp -e hpp $*
+}
+
+function   ffsql {
+    fd -I -e sql $*
+}
+
+
+##
+## finding contents in files easily
+##
+
+function  fgfile {
+    rg --no-ignore -H -n $*
+}
+
+function fgscala {
+    rg --no-ignore -t scala -H -n $*
+}
+
+function fgdhall {
+    rg --no-ignore -t dhall -H -n $*
+}
+
+function  fgjava {
+    rg --no-ignore -t java -H -n $*
+}
+
+function   fgsbt {
+    rg --no-ignore -t sbt -H -n $*
+}
+
+function   fgxml {
+    rg --no-ignore -t xml -H -n $*
+}
+
+function   fgant {
+    rg --no-ignore --type-add 'ant:*.ant' -t ant -H -n $*
+}
+
+function   fgpom {
+    rg --no-ignore --type-add 'pom:*.pom' -t pom -H -n $*
+}
+
+function   fgtxt {
+    rg --no-ignore -t txt -H -n $*
+}
+
+function    fgel {
+    rg --no-ignore -t el -H -n $*
+}
+
+function    fgrs {
+    rg --no-ignore -t rs -H -n $*
+}
+
+function    fgpy {
+    rg --no-ignore -t py -H -n $*
+}
+
+function    fgsh {
+    rg --no-ignore -t sh -H -n $*
+}
+
+function    fgmd {
+    rg --no-ignore -t md -H -n $*
+}
+
+function   fgrst {
+    rg --no-ignore -t rst -H -n $*
+}
+
+function    fgts {
+    rg --no-ignore -t ts -H -n $*
+}
+
+function    fgjs {
+    rg --no-ignore -t js -H -n $*
+}
+
+function  fgjson {
+    rg --no-ignore -t json -H -n $*
+}
+
+function   fgcss {
+    rg --no-ignore -t css -H -n $*
+}
+
+function  fgconf {
+    rg --no-ignore -t config -H -n $*
+}
+
+function  fgyaml {
+    rg --no-ignore -t yaml -H -n $*
+}
+
+function  fgtoml {
+    rg --no-ignore -t toml -H -n $*
+}
+
+function   fgcpp {
+    rg --no-ignore -t cpp -H -n $*
+}
+
+function   fgsql {
+    rg --no-ignore -t sql -H -n $*
+}
+
+
+##
+## network utilities
+##
+function listening {
+    netstat -an | fgrep LISTEN | fgrep -v LISTENING
+}
+
+function ips {
+    ip -o addr show | fgrep "scope global" | sed -r "s/[ \t]+/ /g" | cut -d" " -f2,3,4
+}
+
+
+##
+## copy/paste using the clipboard
+##
+function ctrlc {
+    xclip -i -selection clipboard
+}
+
+function ctrlv {
+    xclip -o -selection clipboard
+}
+
+# Created by `userpath` on 2020-11-11 08:12:40
+export PATH="$PATH:/Users/oluwasetemi/.local/bin"
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+alias rename_video_to_gif='function rename_video_to_gif(){ ffmpeg -i $1 $2.gif && gifsicle -O3 $2.gif -o $2.gif && osascript -e "display notification \"$2.gif successfully converted and saved\" with title \"MOV2GIF SUCCESS!\""};rename_video_to_gif'
+
+alias video_to_gif='function video_to_gif(){ ffmpeg -i "$1" "${1%.*}.gif" && gifsicle -O3 "${1%.*}.gif" -o "${1%.*}.gif" && osascript -e "display notification \"${1%.*}.gif successfully converted and saved\" with title \"MOV2GIF SUCCESS!\""};video_to_gif'
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+eval "$(starship init zsh)"
+
+fpath=(~/.zsh/completions $fpath)
+autoload -U compinit && compinit
+
+# ls everytime you cd
+function cd() {
+    builtin cd $@
+    ls
+}

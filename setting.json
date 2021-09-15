@@ -5,20 +5,19 @@
     // ** EDITOR **
     //--------------------------------------------------
     */
-	"editor.fontFamily": "'Dank Mono','Operator Mono', 'fira code light', monaco, Monoid, Hermit Light, Consolas",
+	"editor.fontFamily": "'Dank Mono', 'IBM Plex Mono Text','Operator Mono', 'fira code light', monaco, Monoid, Hermit Light, Consolas",
 	// "editor.formatOnSave": true,
-	"editor.wordWrap": "on",
 	"editor.fontSize": 12,
 	"editor.cursorStyle": "line",
 	"editor.cursorWidth": 3,
 	"editor.cursorBlinking": "solid",
 	"editor.colorDecorators": true,
 	"editor.matchBrackets": "near",
-	// "editor.parameterHints.enabled": false,
+	"editor.parameterHints.enabled": false,
 	"editor.fontWeight": "100",
 	"editor.lineHeight": 17,
 	"editor.glyphMargin": true,
-	"editor.letterSpacing": 0.3,
+	"editor.letterSpacing": 0.6,
 	"editor.renderWhitespace": "none",
 	"editor.rulers": [80, 100, 120],
 	"editor.minimap.enabled": false,
@@ -30,10 +29,15 @@
 	"editor.smoothScrolling": true,
 	"editor.cursorSmoothCaretAnimation": true,
 	"editor.renderIndentGuides": true,
-	"editor.suggestSelection": "first",
+	"editor.quickSuggestions": {
+		"other": false,
+		"comments": false,
+		"strings": false
+	},
+	"editor.snippetSuggestions": "inline",
 	"diffEditor.renderSideBySide": true,
 	// tell the ESLint plugin to run on save
-	"editor.snippetSuggestions": "top",
+	// "editor.snippetSuggestions": "top",
 	"editor.fontLigatures": true,
 	"editor.tabCompletion": "on",
 	"editor.lineNumbers": "on",
@@ -66,7 +70,7 @@
 	},
 	"[javascript]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.defaultFormatter": "vscode.typescript-language-features",
 		"editor.autoIndent": "advanced",
 		"editor.showUnused": true
 	},
@@ -80,7 +84,15 @@
 	},
 	"[javascriptreact]": {
 		"editor.formatOnSave": false,
-		"editor.showUnused": true
+		"editor.showUnused": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	/**
     //--------------------------------------------------
@@ -124,6 +136,7 @@
 		"javascript": "javascriptreact",
 		"markdown": "html",
 		"vue-html": "html",
+		"django-html": "html",
 		"markdownreact": "html",
 		"mdx": "html"
 	},
@@ -152,9 +165,13 @@
 	"files.associations": {
 		"*.ejs": "html",
 		"*.jsx": "javascriptreact",
+		"*.tsx": "typescriptreact",
 		"*.md": "markdown",
 		".lintstagedrc": "json",
-		".bash_profile": "shellscript"
+		".bash_profile": "shellscript",
+		// "**/templates/**/*": "django-txt",
+		"**/requirements{/**, *}.{txt,in}": "pip-requirements",
+		"*.html": "html"
 	},
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
@@ -211,7 +228,6 @@
     //--------------------------------------------------
     */
 	"window.newWindowDimensions": "inherit",
-	"window.zoomLevel": -1,
 	"window.titleBarStyle": "custom",
 	/**
     //--------------------------------------------------
@@ -224,13 +240,14 @@
 	// "prettier.singleQuote": true,
 	"prettier.bracketSpacing": true,
 	"prettier.printWidth": 80,
-	"prettier.tabWidth": 4,
+	"prettier.tabWidth": 2,
 	"prettier.singleQuote": true,
 	"prettier.trailingComma": "all",
 	"prettier.jsxBracketSameLine": false,
 	"prettier.semi": true,
 	"prettier.useTabs": true,
 	"prettier.proseWrap": "always",
+	"prettier.arrowParens": "avoid",
 	// Optional BUT IMPORTANT: If you have the prettier extension enabled for other languages like CSS and HTML, turn it off for JS since we are doing it through Eslint already
 	// "prettier.disableLanguages": ["javascript", "javascriptreact"],
 	// show snippets before any other auto completion
@@ -271,9 +288,12 @@
 	"terminal.integrated.showExitAlert": false,
 	"terminal.integrated.cursorBlinking": true,
 	"terminal.integrated.cursorStyle": "line",
-	"terminal.integrated.shell.osx": "/bin/zsh",
+	"terminal.integrated.profiles.osx": {
+		"path": null,
+		"args": null
+	},
 	"terminal.integrated.automationShell.osx": "/bin/sh",
-	"terminal.integrated.shellArgs.osx": [],
+	// "terminal.integrated.shell.osx": "",
 	/**
     //--------------------------------------------------
     // ** MARKDOWN **
@@ -322,18 +342,39 @@
     // ** EXTENSIONS **
     //--------------------------------------------------
     */
+	"togglequotes.chars": ["\"", "'", "`"],
 	"auto-rename-tag.activationOnLanguage": [
 		"html",
 		"xml",
 		"javascript",
-		"javascriptreact"
+		// "typescript",
+		"javascriptreact",
+		"typescriptreact"
 	],
+	"auto-close-tag.activationOnLanguage": [
+		"xml",
+		"php",
+		"blade",
+		"ejs",
+		"jinja",
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"plaintext",
+		"markdown",
+		"vue",
+		"liquid",
+		"erb",
+		"lang-cfml",
+		"cfml",
+		"HTML (Eex)"
+	],
+	"auto-close-tag.enableAutoCloseSelfClosingTag": true,
+	"auto-close-tag.enableAutoCloseTag": true,
 	"gitlens.keymap": "alternate",
 	"gitlens.advanced.messages": {
-		"suppressFileNotUnderSourceControlWarning": true,
-		"suppressResultsExplorerNotice": true,
-		"suppressShowKeyBindingsNotice": true,
-		"suppressWelcomeNotice": true
+		"suppressFileNotUnderSourceControlWarning": true
 	},
 	"git.autofetch": true,
 	"git.enableSmartCommit": true,
@@ -368,18 +409,26 @@
 		"Equilibra",
 		"Freecodecamp",
 		"Kubernetes",
+		"Listify",
 		"Mixins",
 		"Oluwasetemi",
 		"Oluwasetemi's",
 		"Osogbo",
 		"PERMISSIONUPDATE",
+		"Parens",
 		"SIGNIN",
+		"SUPERADMIN",
+		"Setemi",
 		"Signout",
 		"Spotify",
+		"Submodules",
+		"Toastify",
 		"Validators",
 		"Workcation",
+		"afterall",
 		"autopopulate",
 		"backticks",
+		"blowitallaway",
 		"clickoutside",
 		"currentuser",
 		"datetime",
@@ -390,15 +439,20 @@
 		"editoutfit",
 		"espanso",
 		"firstname",
+		"frontmatter",
+		"generaters",
 		"ghpages",
 		"graphiql",
 		"graphql",
 		"gravatar",
 		"hacky",
 		"inprogress",
+		"kentcdodds",
+		"keystonejs",
 		"lastname",
 		"linebreak",
 		"localstorage",
+		"loglevel",
 		"mailtrap",
 		"maxlength",
 		"microservice",
@@ -408,26 +462,35 @@
 		"minmax",
 		"mydate",
 		"natterbase",
+		"nonoctal",
+		"noreferrer",
 		"openpyxl",
 		"originalname",
 		"paystack",
 		"precommit",
 		"prepending",
+		"prestart",
 		"promisification",
 		"promisify",
 		"pubsub",
 		"purgecss",
 		"refetch",
+		"reponame",
+		"rerender",
 		"signup",
+		"singleproject",
 		"stacktraces",
 		"subcomponent",
 		"submodule",
 		"tabindex",
 		"tailwindcss",
+		"telebot",
 		"timekit",
 		"totalearned",
 		"userid",
 		"virtuals",
+		"vite",
+		"vitejs",
 		"whatsapp"
 	],
 	"sync.removeExtensions": false,
@@ -536,12 +599,11 @@
 	"[jsonc]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-	"vsintellicode.modify.editor.suggestSelection": "choseToUpdateConfiguration",
+	// "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "vscode.html-language-features"
 	},
-	"workbench.iconTheme": "material-icon-theme",
-	"workbench.colorTheme": "Visual Studio Dark",
+	// "workbench.iconTheme": "material-icon-theme",
 	/*LiveServer settings*/
 	"liveServer.settings.host": "localhost",
 	"liveServer.settings.CustomBrowser": "chrome",
@@ -639,36 +701,54 @@
 		"editor.tabSize": 4
 	},
 	"python.pythonPath": "/usr/bin/python3",
-	"python.languageServer": "Pylance",
+	"python.languageServer": "Default",
+	"python.autoComplete.addBrackets": true,
+	// "beautify.language": {
+	// 	"html": ["django-html"]
+	// },
+	"[django-html]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "HookyQR.beautify"
+	},
+	"python.showStartPage": false,
 	"hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltdLFwiZm9ybWF0V2lkdGhcIjowLFwiY3JlYXRlVGFyZ2V0XCI6ZmFsc2UsXCJwYWdlRm9ybWF0XCI6e1wieFwiOjAsXCJ5XCI6MCxcIndpZHRoXCI6ODI3LFwiaGVpZ2h0XCI6MTE2OX0sXCJzZWFyY2hcIjp0cnVlLFwic2hvd1N0YXJ0U2NyZWVuXCI6dHJ1ZSxcImdyaWRDb2xvclwiOlwiI2QwZDBkMFwiLFwiZGFya0dyaWRDb2xvclwiOlwiIzZlNmU2ZVwiLFwiYXV0b3NhdmVcIjp0cnVlLFwicmVzaXplSW1hZ2VzXCI6bnVsbCxcIm9wZW5Db3VudGVyXCI6MCxcInZlcnNpb25cIjoxOCxcInVuaXRcIjoxLFwiaXNSdWxlck9uXCI6ZmFsc2UsXCJ1aVwiOlwiXCJ9In0=",
-	"kite.showWelcomeNotificationOnStartup": false,
 	// Very important: Install this plugin: https://github.com/be5invis/vscode-custom-css
 	// You'll need to change this to a file URI scheme on your computer: https://en.wikipedia.org/wiki/File_URI_scheme
 	// Mac/Linux: file:///Users/YOUR-PC-USERNAME/.vscodestyles.css
 	// Windows: file:///C:/Users/YOUR-PC-USERNAME/.vscodestyles.css
-	"vscode_custom_css.imports": [
-		"file:///Users/oluwasetemi/.vscodestyles.css"
-	],
-	"auto-close-tag.activationOnLanguage": [
-		"xml",
-		"php",
-		"blade",
-		"ejs",
-		"jinja",
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"plaintext",
-		"markdown",
-		"vue",
-		"liquid",
-		"erb",
-		"lang-cfml",
-		"cfml",
-		"HTML (Eex)",
-		"mdx"
-	],
+	"vscode_custom_css.imports": ["file:///Users/oluwasetemi/.vscodestyles.css"],
 	"liveServer.settings.donotVerifyTags": true,
-	"python.showStartPage": false
+	"workbench.editorAssociations": {
+		"*.ipynb": "jupyter-notebook",
+		"*.mp4": "default",
+		"git-rebase-todo": "default"
+	},
+	"[yaml]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.suggestSelection": "first",
+	"pgsql.connections": [
+		{
+			"host": "localhost",
+			"dbname": "prisma-starter",
+			"user": "oluwasetemi",
+			"password": "",
+			"emptyPasswordInput": true,
+			"port": "5432",
+			"profileName": "prisma"
+		}
+	],
+	"go.toolsManagement.autoUpdate": true,
+	"security.workspace.trust.untrustedFiles": "open",
+	"redhat.telemetry.enabled": true,
+	"python.defaultInterpreterPath": "/usr/bin/python3",
+	"debug.onTaskErrors": "debugAnyway",
+	"python.analysis.completeFunctionParens": true,
+	"notebook.cellToolbarLocation": {
+		"default": "right",
+		"jupyter-notebook": "left"
+	},
+	"window.zoomLevel": -1,
+	"workbench.colorTheme": "Cobalt2"
+	// "cSpell.enableFiletypes": ["django-html"]
 }

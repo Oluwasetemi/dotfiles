@@ -1,3 +1,4 @@
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -70,7 +71,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git node nvm osx npm brew vscode osx zsh-autosuggestions gitignore gatsby)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # gi is exposed from the gitignore plugin some of its command are gi list, gi [template], gi [template] >> .gitignore
 
@@ -187,7 +188,7 @@ alias pg="echo 'Pinging Google' && ping www.google.com";
 alias cb="code ~/.bashrc";
 alias cz="code ~/.zshrc";
 alias cg="code ~/.gitconfig";
-# alias vsc="code .";
+alias vsc="code .";
 alias reload="source ~/.bashrc";
 alias rld="source ~/.zshrc";
 
@@ -220,9 +221,104 @@ alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 # PROMPT STUFF
 #------------------------
 
-GREEN=$(tput setaf 2);
-YELLOW=$(tput setaf 3);
-RESET=$(tput sgr0);
+
+#------------------------
+# COLOR STUFF
+#------------------------
+
+# ANSI
+# Black        0;30     Dark Gray     1;30
+# Red          0;31     Light Red     1;31
+# Green        0;32     Light Green   1;32
+# Brown/Orange 0;33     Yellow        1;33
+# Blue         0;34     Light Blue    1;34
+# Purple       0;35     Light Purple  1;35
+# Cyan         0;36     Light Cyan    1;36
+# Light Gray   0;37     White         1;37
+# Color
+NC='\033[0m' # No Color
+
+# Regular Colors
+BLACK='\033[0;30m'        # Black
+RED='\033[0;31m'          # Red
+GREEN='\033[0;32m'        # Green
+YELLOW='\033[0;33m'       # Yellow
+BLUE='\033[0;34m'         # Blue
+PURPLE='\033[0;35m'       # Purple
+CYAN='\033[0;36m'         # Cyan
+WHITE='\033[0;37m'        # White
+
+# Bold
+BBLACK='\033[1;30m'       # Black
+BRED='\033[1;31m'         # Red
+BGREEN='\033[1;32m'       # Green
+BYELLOW='\033[1;33m'      # Yellow
+BBLUE='\033[1;34m'        # Blue
+BPURPLE='\033[1;35m'      # Purple
+BCYAN='\033[1;36m'        # Cyan
+BWHITE='\033[1;37m'       # White
+
+# Underline
+UBLACK='\033[4;30m'       # Black
+URED='\033[4;31m'         # Red
+UGREEN='\033[4;32m'       # Green
+UYELLOW='\033[4;33m'      # Yellow
+UBLUE='\033[4;34m'        # Blue
+UPURPLE='\033[4;35m'      # Purple
+UCYAN='\033[4;36m'        # Cyan
+UWHITE='\033[4;37m'       # White
+
+# Background
+ON_BLACK='\033[40m'       # Black
+ON_RED='\033[41m'         # Red
+ON_GREEN='\033[42m'       # Green
+ON_YELLOW='\033[43m'      # Yellow
+ON_BLUE='\033[44m'        # Blue
+ON_PURPLE='\033[45m'      # Purple
+ON_CYAN='\033[46m'        # Cyan
+ON_WHITE='\033[47m'       # White
+
+# High Intensity
+IBLACK='\033[0;90m'       # Black
+IRED='\033[0;91m'         # Red
+IGREEN='\033[0;92m'       # Green
+IYELLOW='\033[0;93m'      # Yellow
+IBLUE='\033[0;94m'        # Blue
+IPURPLE='\033[0;95m'      # Purple
+ICYAN='\033[0;96m'        # Cyan
+IWHITE='\033[0;97m'       # White
+
+# Bold High Intensity
+BIBLACK='\033[1;90m'      # Black
+BIRED='\033[1;91m'        # Red
+BIGREEN='\033[1;92m'      # Green
+BIYELLOW='\033[1;93m'     # Yellow
+BIBLUE='\033[1;94m'       # Blue
+BIPURPLE='\033[1;95m'     # Purple
+BICYAN='\033[1;96m'       # Cyan
+BIWHITE='\033[1;97m'      # White
+
+# High Intensity backgrounds
+ON_IBLACK='\033[0;100m'   # Black
+ON_IRED='\033[0;101m'     # Red
+ON_IGREEN='\033[0;102m'   # Green
+ON_IYELLOW='\033[0;103m'  # Yellow
+ON_IBLUE='\033[0;104m'    # Blue
+ON_IPURPLE='\033[0;105m'  # Purple
+ON_ICYAN='\033[0;106m'    # Cyan
+ON_IWHITE='\033[0;107m'   # White
+
+# BLACK=$(tput setaf 0);
+# RED=$(tput setaf 1);
+# GREEN=$(tput setaf 2);
+# YELLOW=$(tput setaf 3);
+# BLUE=$(tput setaf 4);
+# MAGENTA=$(tput setaf 5);
+# CYAN=$(tput setaf 6);
+# WHITE=$(tput setaf 7);
+# GREY=$(tput setaf 8);
+# LIGHTRED=$(tput setaf 9);
+# RESET=$(tput sgr0);
 
 function git_branch {
 
@@ -267,7 +363,7 @@ setopt promptsubst
 HISTSIZE=7000
 HISTFILESIZE=14000
 
-SAVEHIST=5000
+SAVEHIST=10000
 setopt EXTENDED_HISTORY
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 # share history across multiple zsh sessions
@@ -279,6 +375,9 @@ setopt INC_APPEND_HISTORY
 # do not store duplications
 setopt HIST_IGNORE_DUPS
 
+# allow me to auto change directory
+setopt AUTO_CD
+
 # PATH ALTERATIONS
 ## Node
 PATH="/usr/local/bin:$PATH:./node_modules/.bin";
@@ -288,12 +387,28 @@ PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Custom bins
 PATH="$PATH:$HOME/.bin";
-# dotfile bins
 # PATH="$PATH:$HOME/.my_bin";
+# dotfile bins
 
 # CDPATH ALTERATIONS
 # CDPATH=.:$HOME:$HOME/code:$HOME/Desktop
 # CDPATH=($HOME $HOME/code $HOME/Desktop)
+# [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+# zsh-z
+# source ~/zsh-z/zsh-z.plugin.zsh
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/mongodb-community@4.4/bin:$PATH"
+
+# the NODE_PATH env
+export NODE_PATH=`npm root -g`
+export NVM_DIR="$HOME/.nvm"
+
+# add ruby shim to $PATH.
+export PATH=$HOME/.rbenv/shims:$PATH
 
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
@@ -329,16 +444,17 @@ alias nrt="npm run test -s --";
 alias nrtw="npm run test:watch -s --";
 alias nrv="npm run validate -s --";
 alias rmn="rm -rf node_modules";
+alias rml="rm -rf node_modules package.lock.json yarn.lock";
 alias flush-npm="rm -rf node_modules && npm i && say NPM is done";
 alias nicache="npm install --prefer-offline";
 alias nioff="npm install --offline";
 
 ## yarn aliases
 alias yar="yarn run";
-alias yas="yarn run start";
-alias yab="yarn run build";
-alias yat="yarn run test";
-alias yav="yarn run validate";
+alias yas="yarn start";
+alias yab="yarn build";
+alias yat="yarn test";
+alias yav="yarn validate";
 alias yoff="yarn add --offline";
 alias ypm="echo \"Installing deps without lockfile and ignoring engines\" && yarn install --no-lockfile --ignore-engines"
 
@@ -350,7 +466,7 @@ eval "$(hub alias -s)"
 # alias pip=pip3
 
 # for using trash-cli
-alias rm="trash"
+# alias rm="trash"
 
 #.# Better Git Logs.
 ### Using EMOJI-LOG (https://github.com/ahmadawais/Emoji-Log).
@@ -392,6 +508,10 @@ function gdoc() {
 function gtst() {
     gcaz "✅ TEST: $@"
 }
+# BREAKING.
+function gbrk() {
+    gcaz "!! BREAKING: $@"
+}
 # NEW with PUSH.
 function gnewp() {
     gcap "📦 NEW: $@"
@@ -421,6 +541,11 @@ function gtstp() {
     gcap "✅ TEST: $@"
 }
 
+# BREAKING with PUSH.
+function gbrkp() {
+    gcap "!! BREAKING: $@"
+}
+
 # TODO run mongod start with some default requirement
 function hello_world() {
    printf "hello $@"
@@ -435,14 +560,14 @@ function hello_world() {
 get_git_branch() {
   local branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
   # local branch=$(git rev-parse --abrev-ref HEAD)
-  echo $branch
+  echo $YELLOW$branch
 }
 
 # Make a directory && cd into that directory
 function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 
 # Custom functions
-# mg () { mkdir "$@" && cd "$@" || exit; }
+mg () { mkdir "$@" && cd "$@" || exit; }
 shorten() { node ~/Development/projects/shortner/node_modules/.bin/netlify-shortener "$1" "$2"; }
 cdl() { cd "$@" && ll; }
 npm-latest() { npm info "$1" | grep latest; }
@@ -455,7 +580,7 @@ node_prompt () {
 
 # Get Node Version
 get_node_version () {
-  echo $(node -v)
+  echo ${RED}$(node -v)
 }
 
 # Rename all directories to lowercase
@@ -484,14 +609,9 @@ function openall() {
     done
 }
 
-# the NODE_PATH env
-export NODE_PATH=`npm root -g`
-export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# add ruby shim to $PATH.
-export PATH=$HOME/.rbenv/shims:$PATH
 
 # get the url of the current opened tab
 getURL(){
@@ -568,7 +688,7 @@ set-window-title() {
 
 PR_TITLEBAR=''
 set-window-title
-add-zsh-hook precmd set-window-title
+# add-zsh-hook precmd set-window-title
 
 # List all vscode extensions
 function list_vsc_extensions () { code --list-extensions; }
@@ -673,257 +793,6 @@ function yaml_split {
 }
 
 
-##
-## viewing file differences
-##
-
-function cdiff {
-    diff -Naur $*
-}
-function sdiff {
-    diff -Npry $*
-}
-function kdiff {
-    kdiff3 $*
-}
-function vdiff {
-    diffuse $*
-}
-
-
-##
-## finding files easily
-##
-
-function fffile {
-    fd -I $*
-}
-
-function ffdir {
-    fd -I -t d $*
-}
-
-function ffscala {
-    fd -I -e scala $*
-}
-
-function ffdhall {
-    fd -I -e dhall $*
-}
-
-function  ffjava {
-    fd -I -e java $*
-}
-
-function   ffsbt {
-    fd -I -e sbt $*
-}
-
-function   ffxml {
-    fd -I -e xml $*
-}
-
-function   ffant {
-    fd -I -e ant $*
-}
-
-function   ffpom {
-    fd -I -e pom $*
-}
-
-function   fftxt {
-    fd -I -e txt $*
-}
-
-function    ffel {
-    fd -I -e el $*
-}
-
-function    ffrs {
-    fd -I -e rs $*
-}
-
-function    ffpy {
-    fd -I -e py $*
-}
-
-function    ffsh {
-    fd -I -e sh $*
-}
-
-function    ffmd {
-    fd -I -e md $*
-}
-
-function   ffrst {
-    fd -I -e rst $*
-}
-
-function    ffts {
-    fd -I -e ts $*
-}
-
-function    ffjs {
-    fd -I -e js $*
-}
-
-function  ffjson {
-    fd -I -e json $*
-}
-
-function   ffcss {
-    fd -I -e css $*
-}
-
-function  ffform {
-    fd -I -e form $*
-}
-
-function  ffconf {
-    fd -I -e cfg -e conf -e config -e ini $*
-}
-
-function   ffyaml {
-    fd -I -e yml -e yaml $*
-}
-
-function  fftoml {
-    fd -I -e toml $*
-}
-
-function   ffcpp {
-    fd -I -e c -e h -e cpp -e hpp $*
-}
-
-function   ffsql {
-    fd -I -e sql $*
-}
-
-
-##
-## finding contents in files easily
-##
-
-function  fgfile {
-    rg --no-ignore -H -n $*
-}
-
-function fgscala {
-    rg --no-ignore -t scala -H -n $*
-}
-
-function fgdhall {
-    rg --no-ignore -t dhall -H -n $*
-}
-
-function  fgjava {
-    rg --no-ignore -t java -H -n $*
-}
-
-function   fgsbt {
-    rg --no-ignore -t sbt -H -n $*
-}
-
-function   fgxml {
-    rg --no-ignore -t xml -H -n $*
-}
-
-function   fgant {
-    rg --no-ignore --type-add 'ant:*.ant' -t ant -H -n $*
-}
-
-function   fgpom {
-    rg --no-ignore --type-add 'pom:*.pom' -t pom -H -n $*
-}
-
-function   fgtxt {
-    rg --no-ignore -t txt -H -n $*
-}
-
-function    fgel {
-    rg --no-ignore -t el -H -n $*
-}
-
-function    fgrs {
-    rg --no-ignore -t rs -H -n $*
-}
-
-function    fgpy {
-    rg --no-ignore -t py -H -n $*
-}
-
-function    fgsh {
-    rg --no-ignore -t sh -H -n $*
-}
-
-function    fgmd {
-    rg --no-ignore -t md -H -n $*
-}
-
-function   fgrst {
-    rg --no-ignore -t rst -H -n $*
-}
-
-function    fgts {
-    rg --no-ignore -t ts -H -n $*
-}
-
-function    fgjs {
-    rg --no-ignore -t js -H -n $*
-}
-
-function  fgjson {
-    rg --no-ignore -t json -H -n $*
-}
-
-function   fgcss {
-    rg --no-ignore -t css -H -n $*
-}
-
-function  fgconf {
-    rg --no-ignore -t config -H -n $*
-}
-
-function  fgyaml {
-    rg --no-ignore -t yaml -H -n $*
-}
-
-function  fgtoml {
-    rg --no-ignore -t toml -H -n $*
-}
-
-function   fgcpp {
-    rg --no-ignore -t cpp -H -n $*
-}
-
-function   fgsql {
-    rg --no-ignore -t sql -H -n $*
-}
-
-
-##
-## network utilities
-##
-function listening {
-    netstat -an | fgrep LISTEN | fgrep -v LISTENING
-}
-
-function ips {
-    ip -o addr show | fgrep "scope global" | sed -r "s/[ \t]+/ /g" | cut -d" " -f2,3,4
-}
-
-
-##
-## copy/paste using the clipboard
-##
-function ctrlc {
-    xclip -i -selection clipboard
-}
-
-function ctrlv {
-    xclip -o -selection clipboard
-}
-
 # Created by `userpath` on 2020-11-11 08:12:40
 export PATH="$PATH:/Users/oluwasetemi/.local/bin"
 
@@ -940,13 +809,28 @@ alias video_to_gif='function video_to_gif(){ ffmpeg -i "$1" "${1%.*}.gif" && gif
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-eval "$(starship init zsh)"
+eval "$(starship init zsh --print-full-init)"
 
 fpath=(~/.zsh/completions $fpath)
-autoload -U compinit && compinit
+autoload -U compinit && compinit -i
 
 # ls everytime you cd
 function cd() {
     builtin cd $@
     ls
 }
+
+eval "$(pyenv init --path)"
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# chrome alias
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-gpu --crash-dumps-dir=./tmp"
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
+
+#ZSH autosuggestion
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#ZSH autocomplete
+source ~/zsh-autocomplete/zsh-autocomplete.plugin.zsh

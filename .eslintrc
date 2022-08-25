@@ -1,14 +1,17 @@
 {
+	"plugins": ["prettier", "react", "react-hooks", "jest", "import"],
 	"extends": [
 		"eslint:recommended",
 		"airbnb",
 		"prettier",
-		"prettier/react",
-		"plugin:mdx/recommended"
+		"prettier/react"
+		// "plugin:@typescript-eslint/recommended"
+		// "plugin:mdx/recommended"
 	],
 	"parser": "babel-eslint",
 	"parserOptions": {
 		"ecmaVersion": 2020,
+		// "requireConfigFile": false,
 		"ecmaFeatures": {
 			"impliedStrict": true,
 			"classes": true
@@ -22,6 +25,21 @@
 		"es6": true
 	},
 	"rules": {
+		// "no-tabs": "error",
+		"curly": ["error", "multi-line"],
+		"jsx-quotes": "error",
+		"jsx-a11y/accessible-emoji": 0,
+		"jsx-a11y/href-no-hash": "off",
+		"jsx-a11y/anchor-is-valid": [
+			"warn",
+			{
+				"aspects": ["invalidHref"]
+			}
+		],
+		"no-trailing-spaces": "error",
+		"no-undef": "error",
+		"react-hooks/rules-of-hooks": "error",
+		"no-extra-semi": "error",
 		"no-debugger": 0,
 		"no-alert": 0,
 		"no-unused-vars": [
@@ -36,10 +54,7 @@
 				"destructuring": "all"
 			}
 		],
-		"arrow-body-style": [
-			2,
-			"as-needed"
-		],
+		"arrow-body-style": [2, "as-needed"],
 		"no-unused-expressions": [
 			2,
 			{
@@ -63,19 +78,14 @@
 		"consistent-return": 0,
 		"react/display-name": 1,
 		"react/no-array-index-key": 0,
-		"react/react-in-jsx-scope": 0,
 		"react/prefer-stateless-function": 0,
 		"react/forbid-prop-types": 0,
 		"react/no-unescaped-entities": 0,
-		"jsx-a11y/accessible-emoji": 0,
 		"react/require-default-props": 0,
 		"react/jsx-filename-extension": [
 			1,
 			{
-				"extensions": [
-					".js",
-					".jsx"
-				]
+				"extensions": [".js", ".jsx", ".tsx", ".ts"]
 			}
 		],
 		"radix": 0,
@@ -83,14 +93,17 @@
 			2,
 			{
 				"hoist": "all",
-				"allow": [
-					"resolve",
-					"reject",
-					"done",
-					"next",
-					"err",
-					"error"
-				]
+				"allow": ["resolve", "reject", "done", "next", "err", "error"]
+			}
+		],
+		"comma-dangle": [
+			"error",
+			{
+				"arrays": "always-multiline",
+				"objects": "always-multiline",
+				"imports": "only-multiline",
+				"exports": "only-multiline",
+				"functions": "only-multiline"
 			}
 		],
 		"quotes": [
@@ -101,38 +114,52 @@
 				"allowTemplateLiterals": true
 			}
 		],
+		"import/no-unresolved": "error",
+		"import/order": "error",
+		"jest/valid-describe": "off",
+		"jest/valid-expect": "off",
+		"jest/no-conditional-expect": "off",
+		"jest/no-standalone-expect": "off",
+		"jest/expect-expect": "off",
+		"jest/no-export": "off",
+		"jest/valid-title": "off",
+		"jest/no-try-expect": "off",
+		"jest/no-disabled-tests": "error",
+		"object-curly-spacing": ["error", "always"],
+		"react/jsx-boolean-value": "warn",
+		"react/jsx-no-undef": "error",
+		"react/jsx-uses-react": "error",
+		"react/jsx-uses-vars": "error",
+		"react/jsx-wrap-multilines": "warn",
+		"react/no-did-mount-set-state": "warn",
+		"react/no-did-update-set-state": "warn",
+		"react/no-unknown-property": "warn",
+		"react/react-in-jsx-scope": "error",
+		"react/self-closing-comp": "warn",
+		"react/sort-prop-types": "warn",
+		"semi": "error",
+		"strict": "off",
+		"no-restricted-syntax": [
+			"error",
+			{
+				// Curious why we have this rule?
+				// - Enums only work for a subset of use cases that unions of string literals + objects work for and learning one language feature is easier than learning two language features
+				// - Enums are a new language feature which have runtime semantics which means they change TypeScript from JS + types to JS + types + extra language features which is harder to teach without clear advantages for this specific feature
+				"selector": "TSEnumDeclaration",
+				"message": "Use a union of string literals instead of an enum"
+			}
+		],
 		"prettier/prettier": [
 			"error",
 			{
-				// "trailingComma": "es5",
+				"trailingComma": "all",
 				"singleQuote": true,
 				"printWidth": 80,
 				"semi": true,
-				"tabWidth": 2
-			}
-		],
-		"jsx-a11y/href-no-hash": "off",
-		"jsx-a11y/anchor-is-valid": [
-			"warn",
-			{
-				"aspects": [
-					"invalidHref"
-				]
-			}
-		],
-		"comma-dangle": [
-			"error",
-			{
-				"arrays": "never",
-				"objects": "never",
-				"imports": "never",
-				"exports": "never",
-				"functions": "ignore"
+				"tabWidth": 2,
+				"useTabs": false,
+				"arrowParens": "always"
 			}
 		]
-	},
-	"plugins": [
-		"prettier",
-		"jest"
-	]
+	}
 }

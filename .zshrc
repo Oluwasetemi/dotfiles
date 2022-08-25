@@ -74,7 +74,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git node nvm osx npm brew vscode osx zsh-autosuggestions gitignore gatsby)
 
-# source $ZSH/oh-my-zsh.sh
+# # source $ZSH/oh-my-zsh.sh
 
 # gi is exposed from the gitignore plugin some of its command are gi list, gi [template], gi [template] >> .gitignore
 
@@ -418,6 +418,22 @@ export NVM_DIR="$HOME/.nvm"
 
 # add ruby shim to $PATH.
 export PATH=$HOME/.rbenv/shims:$PATH
+# [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+# zsh-z
+# source ~/zsh-z/zsh-z.plugin.zsh
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/mongodb-community@4.4/bin:$PATH"
+
+# the NODE_PATH env
+export NODE_PATH=`npm root -g`
+export NVM_DIR="$HOME/.nvm"
+
+# add ruby shim to $PATH.
+export PATH=$HOME/.rbenv/shims:$PATH
 
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
@@ -454,6 +470,7 @@ alias nrtw="npm run test:watch -s --";
 alias nrv="npm run validate -s --";
 alias rmn="rm -rf node_modules";
 alias rml="rm -rf node_modules package.lock.json yarn.lock";
+alias rml="rm -rf node_modules package.lock.json yarn.lock";
 alias flush-npm="rm -rf node_modules && npm i && say NPM is done";
 alias nicache="npm install --prefer-offline";
 alias nioff="npm install --offline";
@@ -478,7 +495,7 @@ alias gr='grep --color -r'
 # alias pip=pip3
 
 # for using trash-cli
-alias rm="trash"
+# alias rm="trash"
 
 #.# Better Git Logs.
 ### Using EMOJI-LOG (https://github.com/ahmadawais/Emoji-Log).
@@ -524,6 +541,10 @@ function gtst() {
 function gbrk() {
     gcaz "!! BREAKING: $@"
 }
+# BREAKING.
+function gbrk() {
+    gcaz "!! BREAKING: $@"
+}
 # NEW with PUSH.
 function gnewp() {
     gcap "📦 NEW: $@"
@@ -558,6 +579,11 @@ function gbrkp() {
     gcap "!! BREAKING: $@"
 }
 
+# BREAKING with PUSH.
+function gbrkp() {
+    gcap "!! BREAKING: $@"
+}
+
 # TODO run mongod start with some default requirement
 function hello_world() {
    printf "hello $@"
@@ -575,7 +601,7 @@ alias teach="code --user-data-dir ~/.code_profiles/screencast/data"
 get_git_branch() {
   local branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
   # local branch=$(git rev-parse --abrev-ref HEAD)
-  echo $YELLOW$branch
+  echo $YELLOW$YELLOW$branch
 }
 
 # Make a directory && cd into that directory
@@ -595,7 +621,7 @@ node_prompt () {
 
 # Get Node Version
 get_node_version () {
-  echo ${RED}$(node -v)
+  echo ${RED}${RED}$(node -v)
 }
 
 # Rename all directories to lowercase

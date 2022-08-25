@@ -9,6 +9,7 @@
 	protocol = ssh
 [rerere]
 	enabled = true
+	enabled = true
 	autoupdate = true
 [init]
 	defaultBranch = main

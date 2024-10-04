@@ -1,12 +1,22 @@
 [user]
-	name = Oluwasetemi Ojo
+	name = oluwasetemi ojo
 	email = setemiojo@gmail.com
+	signingKey = EFABBD0B72A43FA1F53A027B1F1289E64315F0B8
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
+	ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	ls = ls-files
+	last = log -1 HEAD
+	dft = difftool
+	dlog = -c diff.external=difft log -p --ext-diff
 [core]
 	editor = code --wait
 [hub]
-	protocol = ssh
+	protocol = https
 [rerere]
 	enabled = true
 	enabled = true
@@ -14,12 +24,20 @@
 [init]
 	defaultBranch = main
 [pull]
-	rebase = false
-[diff]
-	tool = vscode
-[difftool "vscode"]
-	cmd = "code --wait --diff $LOCAL $REMOTE"
+	rebase = true
+# [diff]
+# 	tool = vscode
+# [difftool "vscode"]
+# 	cmd = "code --wait --diff $LOCAL $REMOTE"
+# [diff]
+# 	tool = difftastic
+# 	external = difft
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
 [pager]
+	difftool = true
 	# Use `delta`
 	log = delta
 	show = delta
@@ -28,7 +46,6 @@
 
 [interactive]
 	diffFilter = delta --color-only
-
 [delta]
 	features = side-by-side line-numbers decorations
 	syntax-theme = Dracula
@@ -50,3 +67,10 @@
 	postBuffer = 1048576000
 [push]
 	autoSetupRemote = true
+	default = tracking
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg
+[branch]
+	autosetuprebase = always

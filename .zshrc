@@ -19,6 +19,7 @@ alias gaaa='git add --all'
 alias gau='git add --update'
 alias gb='git branch'
 alias gbd='git branch --delete '
+alias gblame='git blame -w -C -C -C'
 alias gc='git commit'
 alias gcm='git commit -S --message'
 alias gcf='git commit --fixup'
@@ -28,7 +29,7 @@ alias main='git checkout main'
 alias gcos='git checkout staging'
 alias gcod='git checkout dev'
 alias gcl='git clone'
-alias gd='git diff --word-diff'
+alias gd='git diff'
 alias gda='git diff HEAD'
 alias gin='git init'
 alias glg='git log --graph --oneline --decorate --all'
@@ -78,7 +79,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-# alias nodetypes="npm install --save @types/node$(node --version | cut -d'.' -f1 | sed 's/v/@^/')"
+alias nodetypes="npm i -D @types/node$(node --version | cut -d'.' -f1 | sed 's/v/@^/')"
 
 # Open all merge conflicts or currently changed files in VS Code
 # Switch out `code` for `subl`, `vim`, `atom` or your editor's CLI
@@ -102,7 +103,7 @@ function touchh() {
 }
 
 function takee() {
-  mkdir -p "$(dirname "$1")" && touch "$1" && mkdircd "$(dirname "$1")"
+  mkdir -p "$(dirname "$1")" && touch "$1" && cd "$(dirname "$1")"
 }
 
 function glp() {
@@ -147,9 +148,13 @@ alias la="ls -la | lolcat"
 alias pg="echo 'Pinging Google' && ping www.google.com"
 alias cb="code ~/.bashrc"
 alias cz="code ~/.zshrc"
+alias zz="zed ~/.zshrc"
 alias chist="code ~/.zsh_history"
+alias zhist="zed ~/.zsh_history"
 alias cg="code ~/.gitconfig"
+alias zg="zed ~/.gitconfig"
 alias clint="code ~/.eslintrc"
+alias zlint="code ~/.eslintrc"
 alias c="code ."
 alias z="zed ."
 alias reload="source ~/.bashrc"
@@ -183,6 +188,22 @@ function pr() {
   fi
 }
 
+function iss() {
+  if [ $1 = "ls" ]; then
+    gh issue list
+  else
+    gh issue view $1
+  fi
+}
+
+function web() {
+  if [ -z $1 ]; then
+    gh repo view -w
+  else
+    gh repo view $1 -w
+  fi
+}
+
 function repo() {
   if [ -z $1 ]; then
     gh repo view -w
@@ -205,19 +226,19 @@ function clone() {
 
 # Clone to ~/i and cd to it
 function clonei() {
-  i && clone "$@" && code . && cd ~2
+  i && clone "$@" && zed . && cd ~2
 }
 
 function cloner() {
-  repros && clone "$@" && code . && cd ~2
+  repros && clone "$@" && zed . && cd ~2
 }
 
 function clonef() {
-  forks && clone "$@" && code . && cd ~2
+  forks && clone "$@" && zed . && cd ~2
 }
 
 function codei() {
-  i && code "$@" && cd -
+  i && zed "$@" && cd -
 }
 
 function serve() {
@@ -231,7 +252,8 @@ function serve() {
 # Directory Aliases
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias wk="cd ~/Development/fluna"
+alias wkf="cd ~/Development/fluna"
+alias wkt="cd ~/Development/tripleten"
 alias atlas="cd ~/Development/fluna/fluna-atlas && c"
 alias fluna="cd ~/Development/fluna/fluna-web-app && c"
 alias core="cd ~/Development/fluna/fluna-core && c"
@@ -426,7 +448,6 @@ PATH="$PATH:$HOME/.bin"
 PATH="$PATH:$HOME/.my_bin"
 PATH="$PATH:$HOME/Development/projects/bash/hub-api-utils/bin"
 # dotfile bins
-
 
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 
@@ -632,13 +653,23 @@ function kill_port() {
 }
 
 # Add Node to prompt
-node_prompt() {
+nov() {
   echo " $c_node_version$(get_node_version)"
+  echo " $c_node_version$(get_bun_version)"
+  echo " $c_node_version$(get_deno_version)"
 }
 
 # Get Node Version
 get_node_version() {
-  echo ${BIGREEN}$(node -v)
+  echo ${BIGREEN}node $(node -v)
+}
+
+get_bun_version() {
+  echo ${BIGREEN}bun $(bun -v)
+}
+
+get_deno_version() {
+  echo ${BIGREEN}$(deno -v)
 }
 
 # open vsc and hyper
@@ -757,6 +788,7 @@ alias h='HISTTIMEFORMAT= history 10 | cut -c8-'
 export PATH="$HOME/.amplify/bin:$PATH"
 # aws cli
 alias caws="code ~/.aws"
+alias zaws="zed ~/.aws"
 
 export PATH="/usr/local/opt/postgresql@13/bin:$PATH"
 
@@ -786,3 +818,86 @@ export CLOUDINARY_URL=cloudinary://579691362961956:WDjNnymc0rg35Nym5Gb5IItZrsk@d
 alias copilot="gh copilot"
 alias gcs="gh copilot suggest"
 alias gce="gh copilot explain"
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+if type complete &>/dev/null; then
+  _npm_completion() {
+    local words cword
+    if type _get_comp_words_by_ref &>/dev/null; then
+      _get_comp_words_by_ref -n = -n @ -n : -w words -i cword
+    else
+      cword="$COMP_CWORD"
+      words=("${COMP_WORDS[@]}")
+    fi
+
+    local si="$IFS"
+    if ! IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
+      COMP_LINE="$COMP_LINE" \
+      COMP_POINT="$COMP_POINT" \
+      npm completion -- "${words[@]}" \
+      2>/dev/null)); then
+      local ret=$?
+      IFS="$si"
+      return $ret
+    fi
+    IFS="$si"
+    if type __ltrim_colon_completions &>/dev/null; then
+      __ltrim_colon_completions "${words[cword]}"
+    fi
+  }
+  complete -o default -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    local si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT - 1)) \
+      COMP_LINE=$BUFFER \
+      COMP_POINT=0 \
+      npm completion -- "${words[@]}" \
+      2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion() {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    if ! IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+      COMP_LINE="$line" \
+      COMP_POINT="$point" \
+      npm completion -- "${words[@]}" \
+      2>/dev/null)); then
+
+      local ret=$?
+      IFS="$si"
+      return $ret
+    fi
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# list global npm packages
+alias npmls="npm list --location=global"
+alias cat='bat --paging=never'
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+alias bathelp='bat --plain --language=help'
+help() {
+  "$@" --help 2>&1 | bathelp
+}
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'

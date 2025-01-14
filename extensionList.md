@@ -24,6 +24,7 @@ donjayamanne.python-extension-pack
 ecmel.vscode-html-css
 editorconfig.editorconfig
 emmanuelbeziat.vscode-great-icons
+esbenp.prettier-vscode
 fabiospampinato.vscode-open-in-github
 firefox-devtools.vscode-firefox-debug
 foxundermoon.shell-format
@@ -54,13 +55,14 @@ ms-python.python
 ms-python.vscode-pylance
 naumovs.color-highlight
 njpwerner.autodocstring
-octref.vetur
 orta.vscode-twoslash
 orta.vscode-twoslash-queries
 pnp.polacode
+redhat.java
 redhat.vscode-yaml
 ritwickdey.liveserver
 sleistner.vscode-fileutils
+stackblitz.tutorialkit
 stivo.tailwind-fold
 streetsidesoftware.code-spell-checker
 stylelint.vscode-stylelint
@@ -75,20 +77,14 @@ visualstudioexptteam.intellicode-api-usage-examples
 visualstudioexptteam.vscodeintellicode
 vitest.explorer
 voorjaar.windicss-intellisense
+vscjava.vscode-gradle
+vscjava.vscode-java-debug
+vscjava.vscode-java-dependency
+vscjava.vscode-java-pack
+vscjava.vscode-java-test
+vscjava.vscode-maven
 vue.volar
 wallabyjs.quokka-vscode
 wallabyjs.wallaby-vscode
 wayou.vscode-todo-highlight
 wholroyd.jinja
-
-[Setting Sync](https://gist.github.com/Oluwasetemi/40ba9fae99386ab07a9427b9f6e0c847)
-
-```sh
-npm i -g @antfu/ni@0.23.0 corepack@0.29.4 esno@4.7.0 jscodeshift@17.0.0 live-server@1.2.2 netlify-cli@17.36.3 npm@10.8.3 trash-cli@6.0.0 typescript@5.6.2 yarn@1.22.22
-```
-
-Run this code to list all vscode extensions
-
-```sh
-  code --list-extensions
-```

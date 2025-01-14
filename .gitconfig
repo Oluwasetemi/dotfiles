@@ -1,7 +1,6 @@
 [user]
 	name = oluwasetemi ojo
 	email = setemiojo@gmail.com
-	signingKey = EFABBD0B72A43FA1F53A027B1F1289E64315F0B8
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
 	ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
@@ -13,18 +12,24 @@
 	last = log -1 HEAD
 	dft = difftool
 	dlog = -c diff.external=difft log -p --ext-diff
+	staash = stash --all
+	b = !bash branch.sh
+	wdiff = diff --word-diff
+	rdiff = diff --submodule=diff
+	discard = !git checkout -- . && git submodule foreach git checkout -- . && git clean -fd
+[column]
+	ui = auto
 [core]
 	editor = code --wait
 [hub]
 	protocol = https
 [rerere]
 	enabled = true
-	enabled = true
 	autoupdate = true
 [init]
 	defaultBranch = main
 [pull]
-	rebase = true
+	# rebase = true
 # [diff]
 # 	tool = vscode
 # [difftool "vscode"]
@@ -73,4 +78,17 @@
 [gpg]
 	program = /usr/local/bin/gpg
 [branch]
-	autosetuprebase = always
+	; autosetuprebase = always
+	sort = -committerdate
+[includeIf "gitdir:/Users/oluwasetemi/Development/fluna"]
+	path = /Users/oluwasetemi/Development/fluna/.gitconfig
+[maintenance]
+	repo = /Users/oluwasetemi/Development/fluna/fluna-web-app
+	repo = /Users/oluwasetemi/Development/fluna/fluna-core
+[fetch]
+	writeCommitGraph = true
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true

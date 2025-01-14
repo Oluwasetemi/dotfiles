@@ -13,7 +13,7 @@
   "editor.cursorStyle": "line",
   "editor.cursorWidth": 3,
   "editor.find.addExtraSpaceOnTop": false,
-  "editor.fontFamily": "IBM Plex Mono, Operator Mono, Fira Code, Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "IBM Plex Mono Light, Operator Mono, Fira Code, Consolas, 'Courier New', monospace",
   "editor.fontSize": 25,
   "editor.fontWeight": "400",
   "editor.formatOnPaste": false,
@@ -21,7 +21,7 @@
   "editor.formatOnType": false,
   "editor.glyphMargin": true,
   "editor.gotoLocation.multipleDefinitions": "goto",
-  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairs": true,
   "editor.hover.above": false,
   "editor.hover.sticky": true,
   "editor.inlineSuggest.enabled": true,
@@ -69,7 +69,7 @@
   "editor.inlayHints.enabled": "on",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.highlightActiveIndentation": true,
-  // "editor.guides.bracketPairsHorizontal": "active",
+  "editor.guides.bracketPairsHorizontal": "active",
   /**
   //--------------------------------------------------
   // ** EDITOR COLOR **
@@ -81,7 +81,7 @@
   // turn it off for JS and JSX, we will do this via eslint
   "editor.codeActionsOnSave": {
     "source.fixAll": "never",
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll.eslint": "never",
     "source.organizeImports": "never",
     "source.fixAll.tslint": "explicit",
     "source.fixAll.stylelint": "explicit"
@@ -204,11 +204,11 @@
   "emmet.excludeLanguages": [],
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.triggerExpansionOnTab": false,
+  "emmet.showExpandedAbbreviation": "always",
   "errorLens.enabledDiagnosticLevels": [
     "warning",
     "error"
   ],
-  "emmet.showExpandedAbbreviation": "always",
   /**
     //--------------------------------------------------
     // ** FILES **
@@ -262,7 +262,6 @@
   "workbench.editor.showTabs": "multiple",
   // this lets you quickly open multiple items in a row and not have the previous ones closed on you
   "workbench.editor.enablePreviewFromQuickOpen": true,
-  "workbench.editor.enablePreview": false,
   "workbench.editor.tabSizing": "shrink",
   "workbench.settings.editor": "json",
   "workbench.tips.enabled": false,
@@ -271,8 +270,6 @@
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.perEditorGroup": true,
   "workbench.editor.limit.value": 5,
-  "workbench.sideBar.location": "right",
-  "workbench.activityBar.location": "top",
   "workbench.editor.empty.hint": "hidden",
   "workbench.colorTheme": "Default Dark+",
   "workbench.tree.enableStickyScroll": true,
@@ -297,6 +294,12 @@
   "workbench.colorCustomizations": {
     "terminal.foreground": "#FAD000",
     "editorLineNumber.foreground": "#FAD000",
+    "editorBracketHighlight.foreground1": "#FFA500",
+    "editorBracketHighlight.foreground2": "#FF69B4",
+    "editorBracketHighlight.foreground3": "#00FF7F",
+    "editorBracketHighlight.foreground4": "#00FFFF",
+    "editorBracketHighlight.foreground5": "#FFD700",
+    "editorBracketHighlight.foreground6": "#FF00FF",
     "editorLineNumber.activeForeground": "#7700ff",
     "menu.separatorBackground": "#c25a63",
     "inputValidation.infoForeground": "#00ff00",
@@ -306,7 +309,8 @@
     "editor.snippetTabstopHighlightBackground": "#369",
     "editor.snippetTabstopHighlightBorder": "#583399",
     "editor.snippetFinalTabstopHighlightBackground": "#3d9933",
-    "editor.snippetFinalTabstopHighlightBorder": "#5c12db"
+    "editor.snippetFinalTabstopHighlightBorder": "#5c12db",
+    "scrollbar.shadow": "#554949"
     // "activityBar.inactiveForeground": "#000",
     // "tab.inactiveBackground": "#f7d958",
     // "tab.inactiveForeground": "#d64b0a"
@@ -325,7 +329,7 @@
     // ** PRETTIER **
     //--------------------------------------------------
     */
-  "prettier.enable": false,
+  "prettier.enable": true,
   "prettier.printWidth": 200,
   "prettier.semi": false,
   "prettier.singleQuote": true,
@@ -541,6 +545,7 @@
     "architectured",
     "autofetch",
     "autopopulate",
+    "backrefernce",
     "backticks",
     "blowitallaway",
     "CHOOSELIFE",
@@ -554,6 +559,7 @@
     "currentuser",
     "Datatypes",
     "datetime",
+    "dbclick",
     "dbname",
     "destructure",
     "destructured",
@@ -571,6 +577,7 @@
     "firstname",
     "Fluna",
     "formik",
+    "FOUC",
     "Freecodecamp",
     "frontmatter",
     "generaters",
@@ -580,6 +587,7 @@
     "gravatar",
     "hacky",
     "iban",
+    "Incoterms",
     "inprogress",
     "insession",
     "ipynb",
@@ -612,6 +620,7 @@
     "mydate",
     "natterbase",
     "Neue",
+    "Nextjs",
     "noactivity",
     "nonoctal",
     "noreferrer",
@@ -640,12 +649,14 @@
     "refetch",
     "reponame",
     "rerender",
+    "rgba",
     "Segoe",
     "Setemi",
     "SIGNIN",
     "Signout",
     "signup",
     "singleproject",
+    "slidev",
     "Spotify",
     "stacktraces",
     "stylelint",
@@ -1003,6 +1014,28 @@
       "sslrootcert": "",
       "sslcrl": "",
       "requirepeer": ""
+    },
+    {
+      "host": "fluna-atlas-clusermaininstance1.clpiy5dscjnd.eu-west-2.rds.amazonaws.com",
+      "user": "flunaAtlasDBUsername",
+      "dbname": "flunaAtlasmain",
+      "password": "",
+      "emptyPasswordInput": false,
+      "port": "5432",
+      "profileName": "atlas_prod",
+      "connectTimeout": 15,
+      "encrypt": false,
+      "applicationName": "vscode-pgsql",
+      "hostaddr": "",
+      "options": "",
+      "sslmode": "prefer",
+      "clientEncoding": "",
+      "sslcompression": true,
+      "sslcert": "",
+      "sslkey": "",
+      "sslrootcert": "",
+      "sslcrl": "",
+      "requirepeer": ""
     }
   ],
   "go.toolsManagement.autoUpdate": true,
@@ -1014,7 +1047,6 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "quokka.showCodeLensInOutputChannel": true,
   "json.schemas": [],
   "yaml.customTags": [
     "!And",
@@ -1088,13 +1120,20 @@
   "typescript.autoClosingTags": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.renameMatchingJsxTags": true,
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "date-fns/*",
+    "date-fns/esm/*",
+    "@fakerjs/faker",
+    "node:*",
+    // "node_modules/**",
+  ],
   "cmake.configureOnOpen": true,
   "[graphql]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "diffEditor.hideUnchangedRegions.enabled": false,
   "diffEditor.maxComputationTime": 0,
-  "diffEditor.ignoreTrimWhitespace": true,
+  "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": true,
   "debug.onTaskErrors": "debugAnyway",
   "svg.preview.mode": "svg",
@@ -1227,5 +1266,10 @@
     "*.w": "$(capture).*.w, I$(capture).w",
     "*.xaml": "$(capture).xaml.cs"
   },
-  "arrayIndexInlay.enabled": true
+  "arrayIndexInlay.enabled": true,
+  "github.copilot.editor.enableCodeActions": false,
+  "workbench.editor.enablePreview": false,
+  "[postcss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  }
 }

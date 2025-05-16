@@ -17,46 +17,66 @@ alias ga='git add'
 alias gaa='git add .'
 alias gaaa='git add --all'
 alias gau='git add --update'
+
 alias gb='git branch'
 alias gbd='git branch --delete '
+
 alias gblame='git blame -w -C -C -C'
+
 alias gc='git commit'
 alias gcm='git commit -S --message'
 alias gcf='git commit --fixup'
+
 alias gco='git checkout'
 alias gcob='git checkout -b'
 alias main='git checkout main'
 alias gcos='git checkout staging'
 alias gcod='git checkout dev'
+
 alias gcl='git clone'
+
 alias gd='git diff'
 alias gda='git diff HEAD'
+
 alias gin='git init'
+
 alias glg='git log --graph --oneline --decorate --all'
 alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
+
 alias gm='git merge --no-ff'
 alias gma='git merge --abort'
 alias gmc='git merge --continue'
+
 alias gp='git pull'
 alias gpr='git pull --rebase'
+
 alias gph='git push'
 alias gpf='git push --force'
+
 alias gr='git rebase'
+
 alias grv='git remote -v'
+
 alias gs='git status'
 alias gss='git status --short'
 alias gsb='git status -sb'
+
 alias gst='git stash'
 alias gsta='git stash apply'
 alias gstd='git stash drop'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gsts='git stash save'
+
 alias grm='git rm'
+
 alias gmv='git mv'
+
 alias grh='git reset HEAD'
 alias grh1='git reset HEAD~1'
+
 alias gfrb='git fetch origin && git rebase origin/master'
+
 alias gxn='git clean -dn'
 alias gx='git clean -df'
 alias gsha='git rev-parse HEAD | pbcopy'
@@ -74,10 +94,7 @@ alias "git latest"="git for-each-ref --sort=-committerdate refs/heads/"
 
 # the NODE_PATH env
 # export NODE_PATH=`npm root -g`
-export NVM_DIR="$HOME/.nvm"
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 alias nodetypes="npm i -D @types/node$(node --version | cut -d'.' -f1 | sed 's/v/@^/')"
 
@@ -204,37 +221,132 @@ function web() {
   fi
 }
 
-function repo() {
-  if [ -z $1 ]; then
-    gh repo view -w
-  else
-    gh repo view $1 -w
-  fi
-}
+# function clone() {
+#   if [[ -z $2 ]]; then
+#     gh repo clone "$1" && cd "$(basename "$1" .git)" || echo "Failed to navigate to the directory"
+#   else
+#     gh repo clone "$1" "$2" && cd "$2" || echo "Failed to navigate to the directory"
+#   fi
+# }
+#
 
-function dir() {
-  mkdir $1 && cd $1
-}
+# function clone() {
+#   if [[ $1 == *"/"* && $1 != http* && $1 != git@* ]]; then
+#     repo_url="https://github.com/$1.git"  # Default to HTTPS
+#   else
+#     repo_url="$1"  # Use provided URL (either SSH or HTTPS)
+#   fi
+
+#   if [[ -z $2 ]]; then
+#     git clone "$repo_url" && cd "$(basename "$repo_url" .git)" || echo "Failed to navigate to the directory"
+#   else
+#     git clone "$repo_url" "$2" && cd "$2" || echo "Failed to navigate to the directory"
+#   fi
+# }
+
+# function clone() {
+#   if [[ $1 == "/" || ( $1 != http* && $1 != git@* ) ]]; then
+#     repo_url="https://github.com/$1.git"
+#   else
+#     repo_url="$1"
+#   fi
+
+#   # Get repo name (e.g., my-repo from https://github.com/user/my-repo.git)
+#   repo_name=$(basename "$repo_url" .git)
+
+#   # If it's in format user/repo, extract user and repo separately
+#   if [[ "$repo_url" == https://github.com/* ]]; then
+#     github_path="${repo_url#https://github.com/}"
+#     github_user="${github_path%%/*}"
+#   elif [[ "$repo_url" == git@github.com:* ]]; then
+#     github_path="${repo_url#git@github.com:}"
+#     github_user="${github_path%%/*}"
+#   else
+#     github_user="Oluwasetemi"
+#   fi
+
+#   if [[ -z $2 ]]; then
+#     target_dir="$repo_name"
+#   else
+#     target_dir="$2"
+#   fi
+
+#   if gh clone "$repo_url" "$target_dir"; then
+#     cd "$target_dir" || echo "Cloned but failed to navigate to $target_dir"
+#   else
+#     echo "Initial clone failed, retrying with alternate folder name..."
+#     lowercase_github_user=$(echo "$github_user" | tr '[:upper:]' '[:lower:]')
+#     fallback_dir="${repo_name}_${github_user}"
+#     if gh clone "$repo_url" "$fallback_dir"; then
+#       cd "$fallback_dir" || echo "Cloned but failed to navigate to $fallback_dir"
+#     else
+#       echo "Clone failed again. Exiting."
+#     fi
+#   fi
+# }
 
 function clone() {
-  if [[ -z $2 ]]; then
-    hub clone "$@" && cd "$(basename "$1" .git)"
+  if [[ -z $1 ]]; then
+    echo "Error: Repository name or URL is required."
+    return 1
+  fi
+
+  if [[ $1 == "/" || ( $1 != http* && $1 != git@* ) ]]; then
+    repo_url="https://github.com/$1.git"
   else
-    hub clone "$@" && cd "$2"
+    repo_url="$1"
+  fi
+
+  repo_name=$(basename "$repo_url" .git)
+
+  if [[ "$repo_url" == https://github.com/* ]]; then
+    github_path="${repo_url#https://github.com/}"
+    github_user="${github_path%%/*}"
+  elif [[ "$repo_url" == git@github.com:* ]]; then
+    github_path="${repo_url#git@github.com:}"
+    github_user="${github_path%%/*}"
+  else
+    github_user=$(git config --global user.name || echo "Oluwasetemi")
+  fi
+
+  target_dir="${2:-$repo_name}"
+
+  if gh repo clone "$repo_url" "$target_dir"; then
+    cd "$target_dir" || { echo "Failed to navigate to $target_dir"; return 1; }
+  else
+    echo "Initial clone failed, retrying with alternate folder names..."
+    lowercase_github_user=$(echo "$github_user" | tr '[:upper:]' '[:lower:]')
+    base_dir="${repo_name}_${lowercase_github_user}"
+    retry_count=1
+    max_retries=100
+
+    while [[ $retry_count -le $max_retries ]]; do
+      fallback_dir="${base_dir}_$retry_count"
+      if gh repo clone "$repo_url" "$fallback_dir"; then
+        cd "$fallback_dir" || { echo "Failed to navigate to $fallback_dir"; return 1; }
+        return 0
+      fi
+      ((retry_count++))
+    done
+
+    echo "Clone failed after $max_retries attempts. Please check the repository URL."
+    return 1
   fi
 }
+
+
 
 # Clone to ~/i and cd to it
 function clonei() {
-  i && clone "$@" && zed . && cd ~2
+  i && clone "$@" && z
 }
 
 function cloner() {
-  repros && clone "$@" && zed . && cd ~2
+  repros && clone "$@" && z
 }
 
 function clonef() {
-  forks && clone "$@" && zed . && cd ~2
+  forks && clone "$@" && z
 }
 
 function codei() {
@@ -243,9 +355,9 @@ function codei() {
 
 function serve() {
   if [[ -z $1 ]]; then
-    live-server dist --ignore='*.scss,*.sass,*.less,*.map,.git/**' --entry-file='index.html'
+    live-server --ignore='*.scss,*.sass,*.less,*.map,.git/**' --entry-file='index.html' dist
   else
-    live-server $1 --ignore='*.scss,*.sass,*.less,*.map,.git/**' --entry-file='index.html'
+    live-server --entry-file='index.html' --ignore='*.scss,*.sass,*.less,*.map,.git/**' $1
   fi
 }
 
@@ -420,10 +532,10 @@ alias harryify="PS1=\"🧙‍\n$ \""
 setopt promptsubst
 
 # history size
-HISTSIZE=7000
-HISTFILESIZE=14000
+HISTSIZE=700000
+HISTFILESIZE=140000
 
-SAVEHIST=10000
+SAVEHIST=100000
 setopt EXTENDED_HISTORY
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTTIMEFORMAT=""
@@ -501,39 +613,17 @@ alias lintf="nr lint --fix"
 alias release="nr release"
 alias re="nr release"
 
-# npm aliases
-# NPM Aliases
-# alias nrb="npm run build"
-# alias nrs="npm run start"
-# alias nrt="npm run test"
-# alias nrtw="npm run test:watch"
-# alias nrd="npm run deploy"
-alias ni="npm install"
-alias nrs="npm run start -s --"
-alias nrb="npm run build -s --"
-alias dev="npm run dev -s --"
-alias nrt="npm run test -s --"
-alias nrtw="npm run test:watch -s --"
 alias nrv="npm run validate -s --"
 alias rmn="rm -rf node_modules"
 alias rml="rm -rf node_modules package.lock.json yarn.lock"
-alias f-npm="rm -rf node_modules && npm i && say NPM is done"
+alias f-npm="rm -rf node_modules &&  ni && say NPM is done"
 alias nicache="npm install --prefer-offline"
 alias nioff="npm install --offline"
 
-## yarn aliases
-alias yar="yarn run"
-alias yas="yarn start"
-alias yab="yarn build"
-alias ydev="yarn dev"
-alias yat="yarn test"
-alias yarnt="yarn test"
-alias yav="yarn validate"
-alias yoff="yarn add --offline"
-alias ypm="echo \"Installing deps without lockfile and ignoring engines\" && yarn install --no-lockfile --ignore-engines"
+
 
 ## use hub for git
-# alias git=hub
+alias git=hub
 eval "$(hub alias -s)"
 
 alias gr='grep --color -r'
@@ -542,7 +632,7 @@ alias gr='grep --color -r'
 # alias pip=pip3
 
 # for using trash-cli
-alias rm="trash"
+# alias rm="trash"
 
 #.# Better Git Logs.
 ### Using EMOJI-LOG (https://github.com/ahmadawais/Emoji-Log).
@@ -627,7 +717,7 @@ function gbrkp() {
 # alias teach="code --extensions-dir ~/code_profiles/egghead/exts --user-data-dir ~/code_profiles/egghead/data"
 
 # For screencasting, use stripped down settings with large text.
-alias teach="code --user-data-dir ~/.code_profiles/screencast/data"
+# alias teach="code --user-data-dir ~/.code_profiles/screencast/data"
 
 # Bash functions
 # Get the current git branch
@@ -697,22 +787,50 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 # allow me to carry over my global npm package after any change of version
 nvm_use() {
+  # Check if version argument is provided
+  if [ -z "$1" ]; then
+      echo "Error: Node.js version argument is required"
+      echo "Usage: nvm_use <node_version>"
+      return 1
+  fi
+
   NODE_NEW=$1
 
-  PREVIOUS_PACKAGES=$(npm ls --location=global --parseable --depth=0)
+  # Get the list of globally installed packages in the current version
+  echo "Getting list of current global packages..."
+  PREVIOUS_PACKAGES=$(npm ls --location=global --depth=0 --parseable | grep "/node_modules/" | sed 's|.*/node_modules/||') || {
+      echo "Error: Failed to get list of current packages"
+      return 1
+  }
 
-  nvm use ${NODE_NEW}
+  # Switch Node.js version
+  echo "Switching to Node.js version ${NODE_NEW}..."
+  if ! nvm use "${NODE_NEW}"; then
+      echo "Error: Failed to switch to Node.js version ${NODE_NEW}"
+      return 1
+  fi
 
-  ALL_PACKAGES=$(npm ls --location=global --depth=0)
+  # Get list of packages in new version
+  CURRENT_PACKAGES=$(npm ls --location=global --depth=0 --parseable | grep "/node_modules/" | sed 's|.*/node_modules/||') || {
+      echo "Error: Failed to get list of packages in new version"
+      return 1
+  }
 
-  for PACKAGE in $(echo "$PREVIOUS_PACKAGES" | grep "/node_modules/[^npm]"); do
-    PACKAGE_NAME=${PACKAGE##*/}
-    PACKAGE_IN_CURRENT_VERSION=$(echo "$ALL_PACKAGES" | grep $PACKAGE_NAME)
-    if [ "$PACKAGE_IN_CURRENT_VERSION" = "" ]; then
-      npm i --location=global $PACKAGE_NAME
-    fi
+  # Install missing packages
+  echo "Installing missing packages..."
+  for PACKAGE in ${PREVIOUS_PACKAGES}; do
+      if ! echo "$CURRENT_PACKAGES" | grep -q "^${PACKAGE}$"; then
+          echo "Installing ${PACKAGE}..."
+          if ! npm install --location=global "${PACKAGE}"; then
+              echo "Warning: Failed to install ${PACKAGE}"
+          fi
+      fi
   done
+
+  echo "Package transfer complete"
+  return 0
 }
+
 
 # add python3.7 bin shim to $PATH.
 export PATH=$HOME/Library/Python/3.7/bin:$PATH
@@ -799,8 +917,8 @@ export PATH="/usr/local/opt/postgresql@13/bin:$PATH"
 export BUN_INSTALL="/Users/oluwasetemi/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export PNPM_HOME="/Users/oluwasetemi/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+# export PNPM_HOME="/Users/oluwasetemi/Library/pnpm"
+# export PATH="$PNPM_HOME:$PATH"
 
 alias -s {html,css,js}="bat"
 
@@ -809,7 +927,7 @@ autoload -Uz compinit && compinit -i
 
 # tabtab source for packages
 # uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+# [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 export PATH="/Users/oluwasetemi/Library/Python/3.9/bin:$PATH"
 
@@ -818,75 +936,8 @@ export CLOUDINARY_URL=cloudinary://579691362961956:WDjNnymc0rg35Nym5Gb5IItZrsk@d
 alias copilot="gh copilot"
 alias gcs="gh copilot suggest"
 alias gce="gh copilot explain"
-###-begin-npm-completion-###
-#
-# npm command completion script
-#
-# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
-# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
-#
 
-if type complete &>/dev/null; then
-  _npm_completion() {
-    local words cword
-    if type _get_comp_words_by_ref &>/dev/null; then
-      _get_comp_words_by_ref -n = -n @ -n : -w words -i cword
-    else
-      cword="$COMP_CWORD"
-      words=("${COMP_WORDS[@]}")
-    fi
 
-    local si="$IFS"
-    if ! IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
-      COMP_LINE="$COMP_LINE" \
-      COMP_POINT="$COMP_POINT" \
-      npm completion -- "${words[@]}" \
-      2>/dev/null)); then
-      local ret=$?
-      IFS="$si"
-      return $ret
-    fi
-    IFS="$si"
-    if type __ltrim_colon_completions &>/dev/null; then
-      __ltrim_colon_completions "${words[cword]}"
-    fi
-  }
-  complete -o default -F _npm_completion npm
-elif type compdef &>/dev/null; then
-  _npm_completion() {
-    local si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT - 1)) \
-      COMP_LINE=$BUFFER \
-      COMP_POINT=0 \
-      npm completion -- "${words[@]}" \
-      2>/dev/null)
-    IFS=$si
-  }
-  compdef _npm_completion npm
-elif type compctl &>/dev/null; then
-  _npm_completion() {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    if ! IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-      COMP_LINE="$line" \
-      COMP_POINT="$point" \
-      npm completion -- "${words[@]}" \
-      2>/dev/null)); then
-
-      local ret=$?
-      IFS="$si"
-      return $ret
-    fi
-    IFS="$si"
-  }
-  compctl -K _npm_completion npm
-fi
-###-end-npm-completion-###
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -901,3 +952,37 @@ help() {
 }
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/oluwasetemi/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/oluwasetemi/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/oluwasetemi/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/oluwasetemi/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Google Cloud SDK configuration
+source "/usr/local/share/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/share/google-cloud-sdk/completion.zsh.inc"
+
+function awsfl() {
+  local env=${1:-dev}  # Default to 'dev' if no parameter is provided
+
+  if [[ "$env" != "dev" && "$env" != "prod" && "$env" != "staging" ]]; then
+    echo "Error: Environment must be 'dev', 'prod', or 'staging'"
+    return 1
+  fi
+
+  aws sso login --profile fluna-"$env"-sso
+}
+
+function yfl() {
+  local env=${1:-dev}  # Default to 'dev' if no parameter is provided
+
+  if [[ "$env" != "dev" && "$env" != "prod" && "$env" != "staging" ]]; then
+    echo "Error: Environment must be 'dev', 'prod', or 'staging'"
+    return 1
+  fi
+
+  yawsso -p fluna-"$env"-sso
+}
+export PATH="/usr/local/opt/icu4c@77/bin:$PATH"
+export PATH="/usr/local/opt/icu4c@77/sbin:$PATH"

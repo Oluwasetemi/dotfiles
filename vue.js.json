@@ -1,0 +1,229 @@
+{
+  "Vue 3 Component (Script Setup)": {
+    "prefix": "setup",
+    "body": [
+      "<script setup>",
+      "import { ref, computed, onMounted } from 'vue';",
+      "",
+      "// Reactive state",
+      "const ${1:count} = ref(${2:0});",
+      "",
+      "// Computed property",
+      "const ${3:doubleCount} = computed(() => ${1:count}.value * 2);",
+      "",
+      "// Methods",
+      "function ${4:increment}() {",
+      "  ${1:count}.value++;",
+      "}",
+      "",
+      "// Lifecycle hooks",
+      "onMounted(() => {",
+      "  console.log('Component mounted');",
+      "});",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    <button @click=\"${4:increment}\">Count: {{ ${1:count} }}</button>",
+      "    <p>Double: {{ ${3:doubleCount} }}</p>",
+      "  </div>",
+      "</template>",
+      "",
+      "<style scoped>",
+      "/* Your scoped styles here */",
+      "</style>"
+    ],
+    "description": "Vue 3 Composition API with `<script setup>`"
+  },
+  "Vue 3 Pinia Store": {
+    "prefix": "pinia-store",
+    "body": [
+      "import { defineStore } from 'pinia';",
+      "import { ref, computed } from 'vue';",
+      "",
+      "export const use${1:StoreName}Store = defineStore('${2:storeId}', () => {",
+      "  // State",
+      "  const ${3:count} = ref(${4:0});",
+      "",
+      "  // Getters",
+      "  const ${5:doubleCount} = computed(() => ${3:count}.value * 2);",
+      "",
+      "  // Actions",
+      "  function ${6:increment}() {",
+      "    ${3:count}.value++;",
+      "  }",
+      "",
+      "  return {",
+      "    ${3:count},",
+      "    ${5:doubleCount},",
+      "    ${6:increment},",
+      "  };",
+      "});"
+    ],
+    "description": "Vue 3 Pinia Store (Composition API)"
+  },
+  "Vue 3 Router Navigation": {
+    "prefix": "router",
+    "body": [
+      "import { useRouter, useRoute } from 'vue-router';",
+      "",
+      "const router = useRouter();",
+      "const route = useRoute();",
+      "",
+      "// Navigate programmatically",
+      "function ${1:navigateToHome}() {",
+      "  router.push({ name: '${2:home}' });",
+      "}",
+      "",
+      "// Access route params",
+      "const ${3:id} = computed(() => route.params.${4:id});"
+    ],
+    "description": "Vue Router navigation helpers"
+  },
+  "Vue 3 Props (Script Setup)": {
+    "prefix": "props2",
+    "body": [
+      "const props = defineProps({",
+      "  ${1:propName}: {",
+      "    type: ${2:String | Number | Boolean | Array | Object | Date | Function | Symbol},",
+      "    required: ${3:false},",
+      "    default: ${4:null},",
+      "  },",
+      "});"
+    ],
+    "description": "Define props in `<script setup>`"
+  },
+  "Vue 3 Emit Event": {
+    "prefix": "emit",
+    "body": [
+      "const emit = defineEmits(['${1:eventName}']);",
+      "",
+      "function ${2:triggerEvent}() {",
+      "  emit('${1:eventName}', ${3:payload});",
+      "}"
+    ],
+    "description": "Emit custom events in Vue 3"
+  },
+  "Vue 3 Watch": {
+    "prefix": "watch",
+    "body": [
+      "import { watch, watchEffect } from 'vue';",
+      "",
+      "// Watch a single ref",
+      "watch(${1:ref}, (newValue, oldValue) => {",
+      "  console.log('Changed:', newValue);",
+      "});",
+      "",
+      "// Watch multiple sources",
+      "watch([${1:ref1}, ${2:ref2}], ([new1, new2], [old1, old2]) => {",
+      "  console.log('Multiple changes:', new1, new2);",
+      "});",
+      "",
+      "// WatchEffect (auto-tracks dependencies)",
+      "watchEffect(() => {",
+      "  console.log('Reactive effect:', ${1:ref}.value);",
+      "});"
+    ],
+    "description": "Vue 3 reactive watchers"
+  },
+  "Vue 3 Teleport": {
+    "prefix": "teleport",
+    "body": [
+      "<teleport to=\"${1:#app | body}\">",
+      "  <div class=\"${2:modal}\">",
+      "    ${3:<!-- Modal content -->}",
+      "  </div>",
+      "</teleport>"
+    ],
+    "description": "Teleport component for modals/toasts"
+  },
+  "Vue 3 Suspense": {
+    "prefix": "suspense",
+    "body": [
+      "<Suspense>",
+      "  <template #default>",
+      "    <${1:AsyncComponent} />",
+      "  </template>",
+      "  <template #fallback>",
+      "    <div>Loading...</div>",
+      "  </template>",
+      "</Suspense>"
+    ],
+    "description": "Suspense for async components"
+  },
+  "Vue 3 Component": {
+    "prefix": "component",
+    "body": [
+      "<script setup>",
+      "// Logic here",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    ${1:<!-- Template content -->}",
+      "  </div>",
+      "</template>",
+      "",
+      "<style scoped>",
+      "/* Scoped styles */",
+      "</style>"
+    ],
+    "description": "Basic Vue 3 component with `<script setup>`"
+  },
+  "Vue 3 Component template script": {
+    "prefix": "temp-script",
+    "body": [
+      "<script setup>",
+      "${0}",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    ${1:<!-- Template content -->}",
+      "  </div>",
+      "</template>",
+      ""
+    ],
+    "description": "Basic Vue 3 component with `<script setup>`"
+  },
+  "Vue 3 Scoped Styles": {
+    "prefix": "scoped",
+    "body": [
+      "<style scoped>",
+      "  .${1:class} {",
+      "    ${2:/* Styles */}",
+      "  }",
+      "</style>"
+    ],
+    "description": "Add scoped styles to a Vue component"
+  },
+  "Vue 3 Template Only": {
+    "prefix": "template",
+    "body": ["<template>", "  <div>${1:<!-- Content -->}</div>", "</template>"],
+    "description": "Vue 3 template-only component"
+  },
+  "Vue 3 Props": {
+    "prefix": "props",
+    "body": [
+      "<script setup>",
+      "const props = defineProps({",
+      "  ${1:propName}: ${2:String},",
+      "});",
+      "</script>"
+    ],
+    "description": "Vue 3 component with props"
+  },
+  "Vue 3 Emits": {
+    "prefix": "emits",
+    "body": [
+      "<script setup>",
+      "const emit = defineEmits(['${1:eventName}']);",
+      "",
+      "function triggerEvent() {",
+      "  emit('${1:eventName}', ${2:payload});",
+      "}",
+      "</script>"
+    ],
+    "description": "Vue 3 component with emits"
+  }
+}

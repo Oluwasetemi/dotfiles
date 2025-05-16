@@ -1,0 +1,56 @@
+{
+  // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+
+  //ejs
+  "Ejs brackets": {
+    "scope": "html, ejs",
+    "prefix": "ejs",
+    "body": ["<% $1 %>"],
+    "description": "log the ejs <% ===== %> brackets"
+  },
+  "Ejs brackets 2": {
+    "scope": "html, ejs",
+    "prefix": "ejs2",
+    "body": ["<%= $1 %>"],
+    "description": "log the ejs <%= ===== %> brackets"
+  },
+  "Ejs brackets 3": {
+    "scope": "html, ejs",
+    "prefix": "ejs3",
+    "body": ["<%- $1 %>"],
+    "description": "log the ejs <%- ===== %> brackets"
+  },
+  "Prettier Ignore Block": {
+    "prefix": "prettier-ignore",
+    "body": [
+      "<!-- prettier-ignore-start -->",
+      "$TM_SELECTED_TEXT",
+      "<!-- prettier-ignore-end -->"
+    ],
+    "description": "Wrap selection with Prettier ignore comments"
+  },
+  "Prettier Ignore Block CSS": {
+    "prefix": "prettier-ignore-css",
+    "body": [
+      "/* prettier-ignore-start */",
+      "$TM_SELECTED_TEXT",
+      "/* prettier-ignore-end */"
+    ],
+    "description": "Wrap selection with Prettier ignore comments"
+  }
+}
